@@ -41,100 +41,55 @@ export default function AboutPage() {
         <link rel="canonical" href="https://faithfeedsinternational.org/about" />
       </head>
 
-      {/* Navigation */}
-      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled 
-          ? 'bg-white shadow-lg border-b border-gray-100' 
-          : 'bg-white/95 backdrop-blur-md'
-      }`}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16 lg:h-20">
-            {/* Logo */}
-            <div className="flex items-center space-x-3 group">
-              <div className="relative">
-                <img 
-                  src="http://faithcp.rf.gd/wp-content/uploads/2025/06/FFI-LOGO.png" 
-                  alt="Faith Feeds International Logo" 
-                  className="h-8 sm:h-10 w-auto transform group-hover:scale-105 transition-transform duration-300"
-                />
-              </div>
-              <div className="hidden sm:block">
-                <span className="text-gray-900 font-bold text-lg xl:text-xl">Faith Feeds International</span>
-                <div className="text-xs text-gray-600 -mt-1">Transforming Lives</div>
-              </div>
-              <span className="sm:hidden text-gray-900 font-bold text-lg">FFI</span>
-            </div>
+      
 
-            {/* Desktop Navigation */}
-            <div className="hidden lg:flex items-center space-x-8">
-              {navItems.map((item) => (
-                <a
-                  key={item}
-                  href={`#${item.toLowerCase().replace(/\s+/g, '-')}`}
-                  className="text-gray-700 hover:text-[#833556] font-medium transition-all duration-300 relative group text-sm xl:text-base py-2"
-                >
-                  {item}
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#833556] group-hover:w-full transition-all duration-300" />
-                </a>
-              ))}
-            </div>
-
-            {/* Mobile Menu Button */}
-            <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="lg:hidden text-gray-700 hover:text-[#833556] p-2 hover:bg-gray-100 rounded-lg transition-all duration-200"
-              aria-label="Toggle menu"
-            >
-              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
-          </div>
-
-          {/* Mobile Navigation */}
-          <div className={`lg:hidden transition-all duration-300 overflow-hidden ${
-            isMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
-          }`}>
-            <div className="bg-gray-50 border-t border-gray-100 mt-2 rounded-lg mx-2">
-              <div className="px-4 py-4 space-y-2">
-                {navItems.map((item, index) => (
-                  <a
-                    key={item}
-                    href={`#${item.toLowerCase().replace(/\s+/g, '-')}`}
-                    className="block text-gray-700 hover:text-[#833556] font-medium transition-all duration-200 py-3 px-4 rounded-lg hover:bg-white border-l-4 border-transparent hover:border-[#833556]"
-                    onClick={() => setIsMenuOpen(false)}
-                    style={{ animationDelay: `${index * 0.1}s` }}
-                  >
-                    {item}
-                  </a>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </nav>
-
-      {/* Hero Section */}
+      {/* Hero Section with Background Image */}
       <main className="relative pt-16 lg:pt-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Background Image */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/images/aboutbackground.jpg"
+            alt="Faith Feeds International community background"
+            fill
+            className="object-cover"
+            priority={true}
+          />
+          {/* Gradient Overlay for text visibility */}
+          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/30"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/40"></div>
+        </div>
+
+        {/* Hero Content */}
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center py-16 lg:py-24">
             {/* Badge */}
-            <div className="inline-flex items-center px-4 py-2 rounded-full bg-[#833556]/10 text-[#833556] text-sm font-medium mb-8">
+            <div className="inline-flex items-center px-4 py-2 rounded-full bg-white/20 backdrop-blur-sm text-white text-sm font-medium mb-8 border border-white/30">
               <BookOpen size={16} className="mr-2" />
               About Our Mission
             </div>
 
             {/* Main Heading */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight mb-6">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6 drop-shadow-lg">
               About
-              <span className="text-[#833556] block mt-2">
+              <span className="text-[#ffd700] block mt-2 drop-shadow-lg">
                 Faith Feeds International
               </span>
             </h1>
 
             {/* Subtitle */}
-            <p className="text-lg sm:text-xl text-gray-600 leading-relaxed max-w-3xl mx-auto">
+            <p className="text-lg sm:text-xl text-white/90 leading-relaxed max-w-3xl mx-auto drop-shadow-md">
               A faith-led initiative dedicated to restoring dignity through uplifting vulnerable communities 
               while empowering youth to lead change through service and leadership.
             </p>
+
+            {/* Call to Action Button */}
+            <div className="mt-8">
+              <button className="group relative px-8 py-4 bg-[#833556] text-white font-semibold text-lg rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 transform hover:-translate-y-1 flex items-center justify-center gap-2 mx-auto backdrop-blur-sm">
+                <Heart size={20} />
+                Learn More About Us
+                <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform duration-300" />
+              </button>
+            </div>
           </div>
         </div>
       </main>
@@ -217,12 +172,8 @@ export default function AboutPage() {
               Leadership
             </div>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-              Meet Our
-              <span className="text-[#833556] block mt-2">
-                Founder
-              </span>
+              Meet Our <span className="text-[#833556] mt-2">Founder</span>
             </h2>
-            <div className="w-24 h-1 bg-[#833556] mx-auto"></div>
           </div>
           
           <div className="max-w-4xl mx-auto">
@@ -285,12 +236,9 @@ export default function AboutPage() {
               Our Foundation
             </div>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-              Our
-              <span className="text-[#833556] block mt-2">
-                Values
-              </span>
+              Our <span className="text-[#833556] mt-2">Values</span>
             </h2>
-            <div className="w-24 h-1 bg-[#833556] mx-auto"></div>
+            
           </div>
           
           <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
@@ -340,12 +288,9 @@ export default function AboutPage() {
               Who We Serve
             </div>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-              Our Target
-              <span className="text-[#833556] block mt-2">
-                Audience
-              </span>
+              Our Target <span className="text-[#833556] mt-2">Audience</span>
             </h2>
-            <div className="w-24 h-1 bg-[#833556] mx-auto mb-8"></div>
+
             <p className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto">
               Our primary focus will be on empowering those who need it most:
             </p>
@@ -418,12 +363,8 @@ export default function AboutPage() {
               Recent Impact
             </div>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-              Recent
-              <span className="text-[#833556] block mt-2">
-                Causes
-              </span>
+              Recent <span className="text-[#833556] mt-2">Causes</span>
             </h2>
-            <div className="w-24 h-1 bg-[#833556] mx-auto mb-8"></div>
             <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto">
               These are the current events we have had recently in creating awareness for the youth in the community
             </p>
@@ -611,7 +552,7 @@ export default function AboutPage() {
       </section>
 
       {/* Contact Us Section */}
-<section className="py-16 lg:py-24 bg-white">
+<section className="py-16 lg:py-24 bg-white" id='contact'>
   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div className="text-center mb-12 lg:mb-16">
       <div className="inline-flex items-center px-4 py-2 rounded-full bg-[#833556]/10 text-[#833556] text-sm font-medium mb-6">
@@ -619,19 +560,15 @@ export default function AboutPage() {
         Get In Touch
       </div>
       <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-        Contact
-        <span className="text-[#833556] block mt-2">
-          Us
-        </span>
+        Contact <span className="text-[#833556] mt-2">Us</span>
       </h2>
-      <div className="w-24 h-1 bg-[#833556] mx-auto mb-8"></div>
       <p className="text-lg sm:text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
         Feel free to ask us for any inquiries or for an opportunity to join us in our mission. 
         We highly accept new members as well, so be sure to register with us.
       </p>
     </div>
     
-    <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
+    <div className="grid lg:grid-cols-2 gap-12 lg:gap-16" >
       {/* Contact Form */}
       <div className="space-y-8">
         <div>
