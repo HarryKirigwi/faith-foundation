@@ -507,6 +507,305 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* Testimonials Section */}
+      <section className="py-16 lg:py-24 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12 lg:mb-16">
+            <div className="inline-flex items-center px-4 py-2 rounded-full bg-[#833556]/10 text-[#833556] text-sm font-medium mb-6">
+              <Users size={16} className="mr-2" />
+              Testimonials
+            </div>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+              What People Are
+              <span className="text-[#833556] block mt-2">
+                Saying
+              </span>
+            </h2>
+            <div className="w-24 h-1 bg-[#833556] mx-auto mb-8"></div>
+            <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto">
+              Hear from community members, volunteers, and beneficiaries who have experienced the transformative power of Faith Feeds International.
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-8 lg:gap-12">
+            {/* Testimonial 1 */}
+            <div className="group relative overflow-hidden rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 transform hover:-translate-y-1">
+              <div className="absolute inset-0 bg-gradient-to-br from-[#833556]/5 to-transparent"></div>
+              <div className="relative p-8 bg-white">
+                <div className="flex items-center mb-6">
+                  <div className="w-16 h-16 bg-[#833556]/10 rounded-full flex items-center justify-center mr-4">
+                    <span className="text-[#833556] font-bold text-xl">M</span>
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-bold text-gray-900">Michael Onyango Odwallo</h3>
+                    <p className="text-sm text-gray-600">Community Member</p>
+                  </div>
+                </div>
+                <div className="mb-6">
+                  <div className="flex text-[#833556] mb-4">
+                    {"★".repeat(5)}
+                  </div>
+                  <p className="text-gray-600 text-base leading-relaxed italic">
+                    "FFI is an amazing space for connecting with people of all walks to inspire others to live quality lives that are proportional to or beyond their potential."
+                  </p>
+                </div>
+              </div>
+            </div>
+            
+            {/* Testimonial 2 */}
+            <div className="group relative overflow-hidden rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 transform hover:-translate-y-1">
+              <div className="absolute inset-0 bg-gradient-to-br from-[#833556]/5 to-transparent"></div>
+              <div className="relative p-8 bg-white">
+                <div className="flex items-center mb-6">
+                  <div className="w-16 h-16 bg-[#833556]/10 rounded-full flex items-center justify-center mr-4">
+                    <span className="text-[#833556] font-bold text-xl">E</span>
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-bold text-gray-900">Emily Wanjiku</h3>
+                    <p className="text-sm text-gray-600">Volunteer</p>
+                  </div>
+                </div>
+                <div className="mb-6">
+                  <div className="flex text-[#833556] mb-4">
+                    {"★".repeat(5)}
+                  </div>
+                  <p className="text-gray-600 text-base leading-relaxed italic">
+                    "Faith Feeds International gave me the opportunity to volunteer and truly make a difference. Seeing the smiles on children's faces after receiving meals and school supplies was life-changing."
+                  </p>
+                </div>
+              </div>
+            </div>
+            
+            {/* Testimonial 3 */}
+            <div className="group relative overflow-hidden rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 transform hover:-translate-y-1">
+              <div className="absolute inset-0 bg-gradient-to-br from-[#833556]/5 to-transparent"></div>
+              <div className="relative p-8 bg-white">
+                <div className="flex items-center mb-6">
+                  <div className="w-16 h-16 bg-[#833556]/10 rounded-full flex items-center justify-center mr-4">
+                    <span className="text-[#833556] font-bold text-xl">B</span>
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-bold text-gray-900">Brian Mutembei</h3>
+                    <p className="text-sm text-gray-600">Program Beneficiary</p>
+                  </div>
+                </div>
+                <div className="mb-6">
+                  <div className="flex text-[#833556] mb-4">
+                    {"★".repeat(5)}
+                  </div>
+                  <p className="text-gray-600 text-base leading-relaxed italic">
+                    "Thanks to their youth programs, I found purpose and support during a tough season of my life. They don't just talk about change — they walk the journey with you."
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div className="text-center mt-12">
+            <div className="inline-flex items-center px-6 py-3 rounded-full bg-[#833556]/10 text-[#833556] text-sm font-medium">
+              <Heart size={16} className="mr-2" />
+              Join our community of changemakers
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Us Section */}
+<section className="py-16 lg:py-24 bg-white">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="text-center mb-12 lg:mb-16">
+      <div className="inline-flex items-center px-4 py-2 rounded-full bg-[#833556]/10 text-[#833556] text-sm font-medium mb-6">
+        <Globe size={16} className="mr-2" />
+        Get In Touch
+      </div>
+      <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+        Contact
+        <span className="text-[#833556] block mt-2">
+          Us
+        </span>
+      </h2>
+      <div className="w-24 h-1 bg-[#833556] mx-auto mb-8"></div>
+      <p className="text-lg sm:text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
+        Feel free to ask us for any inquiries or for an opportunity to join us in our mission. 
+        We highly accept new members as well, so be sure to register with us.
+      </p>
+    </div>
+    
+    <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
+      {/* Contact Form */}
+      <div className="space-y-8">
+        <div>
+          <h3 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-6">
+            Send Us A Message
+          </h3>
+          <form className="space-y-6">
+            <div className="grid md:grid-cols-2 gap-6">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  First Name
+                </label>
+                <input
+                  type="text"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#833556] focus:border-transparent transition-all duration-200 text-gray-900 placeholder:text-gray-500"
+                  placeholder="Your first name"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Last Name
+                </label>
+                <input
+                  type="text"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#833556] focus:border-transparent transition-all duration-200 text-gray-900 placeholder:text-gray-500"
+                  placeholder="Your last name"
+                />
+              </div>
+            </div>
+            
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Email Address
+              </label>
+              <input
+                type="email"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#833556] focus:border-transparent transition-all duration-200 text-gray-900 placeholder:text-gray-500"
+                placeholder="your.email@example.com"
+              />
+            </div>
+            
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Phone Number
+              </label>
+              <input
+                type="tel"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#833556] focus:border-transparent transition-all duration-200 text-gray-900 placeholder:text-gray-500"
+                placeholder="+1 (555) 123-4567"
+              />
+            </div>
+            
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Subject
+              </label>
+              <select className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#833556] focus:border-transparent transition-all duration-200 text-gray-900">
+                <option value="" className="text-gray-500">Select a subject</option>
+                <option value="volunteer" className="text-gray-900">Volunteer Opportunity</option>
+                <option value="partnership" className="text-gray-900">Partnership Inquiry</option>
+                <option value="donation" className="text-gray-900">Donation Information</option>
+                <option value="general" className="text-gray-900">General Inquiry</option>
+                <option value="membership" className="text-gray-900">Membership Registration</option>
+              </select>
+            </div>
+            
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Message
+              </label>
+              <textarea
+                rows="5"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#833556] focus:border-transparent transition-all duration-200 resize-none text-gray-900 placeholder:text-gray-500"
+                placeholder="Tell us about your inquiry or how you'd like to get involved..."
+              ></textarea>
+            </div>
+            
+            <button
+              type="submit"
+              className="group w-full px-8 py-4 bg-[#833556] text-white font-semibold text-lg rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 transform hover:-translate-y-1 flex items-center justify-center gap-2"
+            >
+              Send Message
+              <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform duration-300" />
+            </button>
+          </form>
+        </div>
+      </div>
+      
+      {/* Contact Information */}
+      <div className="space-y-8">
+        <div>
+          <h3 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-6">
+            Contact Information
+          </h3>
+          <div className="space-y-8">
+            {/* Physical Address */}
+            <div className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 transform hover:-translate-y-1">
+              <div className="absolute inset-0 bg-gradient-to-br from-[#833556]/5 to-transparent"></div>
+              <div className="relative p-6 bg-white">
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-[#833556] rounded-xl flex items-center justify-center mr-4">
+                    <Globe className="w-6 h-6 text-white" />
+                  </div>
+                  <h4 className="text-lg font-bold text-gray-900">Physical Address</h4>
+                </div>
+                <p className="text-gray-600 text-base leading-relaxed">
+                  3528 SE 94 street Okc
+                </p>
+              </div>
+            </div>
+            
+            {/* Work Hours */}
+            <div className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 transform hover:-translate-y-1">
+              <div className="absolute inset-0 bg-gradient-to-br from-[#833556]/5 to-transparent"></div>
+              <div className="relative p-6 bg-white">
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-[#833556] rounded-xl flex items-center justify-center mr-4">
+                    <Users className="w-6 h-6 text-white" />
+                  </div>
+                  <h4 className="text-lg font-bold text-gray-900">Work Hours</h4>
+                </div>
+                <div className="space-y-2 text-gray-600">
+                  <p className="text-base">Monday to Friday: 7am - 7pm</p>
+                  <p className="text-base">Weekend: 10am - 5pm</p>
+                </div>
+              </div>
+            </div>
+            
+            {/* Call Or WhatsApp */}
+            <div className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 transform hover:-translate-y-1">
+              <div className="absolute inset-0 bg-gradient-to-br from-[#833556]/5 to-transparent"></div>
+              <div className="relative p-6 bg-white">
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-[#833556] rounded-xl flex items-center justify-center mr-4">
+                    <Target className="w-6 h-6 text-white" />
+                  </div>
+                  <h4 className="text-lg font-bold text-gray-900">Call Or WhatsApp</h4>
+                </div>
+                <a 
+                  href="tel:+14055351599"
+                  className="text-[#833556] text-base font-medium hover:text-[#a04066] transition-colors duration-200"
+                >
+                  +1 (405) 535-1599
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        {/* Quick Links */}
+        <div className="bg-gray-50 rounded-2xl p-6">
+          <h4 className="text-lg font-bold text-gray-900 mb-4">Quick Actions</h4>
+          <div className="space-y-3">
+            <button className="w-full text-left text-[#833556] px-4 py-3 bg-white rounded-lg hover:bg-[#833556] hover:text-white transition-all duration-200 flex items-center gap-3">
+              <Users size={16} />
+              <span>Volunteer Registration</span>
+            </button>
+            <button className="w-full text-left text-[#833556] px-4 py-3 bg-white rounded-lg hover:bg-[#833556] hover:text-white transition-all duration-200 flex items-center gap-3">
+              <Heart size={16} />
+              <span>Partnership Inquiry</span>
+            </button>
+            <button className="w-full text-left text-[#833556] px-4 py-3 bg-white rounded-lg hover:bg-[#833556] hover:text-white transition-all duration-200 flex items-center gap-3">
+              <Shield size={16} />
+              <span>Donation Information</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
       {/* Call to Action */}
       <section className="py-16 lg:py-24 bg-[#833556] text-white relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-[#833556] to-[#a04066]"></div>

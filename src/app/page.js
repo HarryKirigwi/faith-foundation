@@ -3,6 +3,7 @@ import React from 'react';
 import FaithFeedsHero from '@/landing/page';
 import ServicesSection from '@/services/page';
 import AboutPage from '@/about/page';
+import FaithFeedsFooter from '@/footer/page';
 
 // Helper component for icons (using inline SVG for simplicity)
 
@@ -19,6 +20,7 @@ export default function App() {
       <ServicesSection />
 
       <AboutPage />
+      <FaithFeedsFooter/>
 
       {/* You can continue adding more components here for a complete page */}
       {/* For example: <TestimonialsSection />, <EventsCalendar />, <ContactForm /> etc. */}
