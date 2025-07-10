@@ -17,11 +17,11 @@ import {
 
 const FaithFeedsFooter = () => {
   const quickLinks = [
-    { name: 'About Us', href: '#about' },
-    { name: 'What We Do', href: '#what-we-do' },
-    { name: 'Projects', href: '#projects' },
-    { name: 'Volunteer', href: '#volunteer' },
-    { name: 'Contact', href: '#contact' }
+    { name: 'About Us', href: '/pages/about' },
+    { name: 'What We Do', href: '/pages/whatwedo' },
+    { name: 'Projects', href: '/pages/projects' },
+    { name: 'Volunteer', href: '/pages/volunteer' },
+    { name: 'Contact', href: '/pages/about#contact' }
   ];
 
   const supportLinks = [
@@ -33,7 +33,7 @@ const FaithFeedsFooter = () => {
   ];
 
   const resourceLinks = [
-    { name: 'Faith Feeds Blog', href: '#blog' },
+    { name: 'Faith Feeds Blog', href: '/pages/blog' },
     { name: 'Impact Stories', href: '#stories' },
     { name: 'Annual Reports', href: '#reports' },
     { name: 'News & Updates', href: '#news' },
