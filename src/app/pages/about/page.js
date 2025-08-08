@@ -8,29 +8,33 @@ export default function AboutPage() {
   const [isVisible, setIsVisible] = useState({});
 
   useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    if (typeof window !== 'undefined') {
+      const handleScroll = () => setScrollY(window.scrollY);
+      window.addEventListener('scroll', handleScroll);
+      return () => window.removeEventListener('scroll', handleScroll);
+    }
   }, []);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          setIsVisible((prev) => ({
-            ...prev,
-            [entry.target.id]: entry.isIntersecting,
-          }));
-        });
-      },
-      { threshold: 0.1, rootMargin: '100px' }
-    );
+    if (typeof window !== 'undefined' && typeof document !== 'undefined') {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            setIsVisible((prev) => ({
+              ...prev,
+              [entry.target.id]: entry.isIntersecting,
+            }));
+          });
+        },
+        { threshold: 0.1, rootMargin: '100px' }
+      );
 
-    document.querySelectorAll('[id]').forEach((el) => {
-      observer.observe(el);
-    });
+      document.querySelectorAll('[id]').forEach((el) => {
+        observer.observe(el);
+      });
 
-    return () => observer.disconnect();
+      return () => observer.disconnect();
+    }
   }, []);
 
   const navItems = [

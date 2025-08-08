@@ -7,29 +7,33 @@ const LandingPage = () => {
   const [isVisible, setIsVisible] = useState({});
 
   useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    if (typeof window !== 'undefined') {
+      const handleScroll = () => setScrollY(window.scrollY);
+      window.addEventListener("scroll", handleScroll);
+      return () => window.removeEventListener("scroll", handleScroll);
+    }
   }, []);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          setIsVisible((prev) => ({
-            ...prev,
-            [entry.target.id]: entry.isIntersecting,
-          }));
-        });
-      },
-      { threshold: 0.1, rootMargin: '50px' }
-    );
+    if (typeof window !== 'undefined' && typeof document !== 'undefined') {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            setIsVisible((prev) => ({
+              ...prev,
+              [entry.target.id]: entry.isIntersecting,
+            }));
+          });
+        },
+        { threshold: 0.1, rootMargin: '50px' }
+      );
 
-    document.querySelectorAll('[id]').forEach((el) => {
-      observer.observe(el);
-    });
+      document.querySelectorAll('[id]').forEach((el) => {
+        observer.observe(el);
+      });
 
-    return () => observer.disconnect();
+      return () => observer.disconnect();
+    }
   }, []);
 
   const stats = [
@@ -276,7 +280,11 @@ const LandingPage = () => {
         {/* Enhanced Scroll Indicator */}
         <div 
           className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-gray-400 cursor-pointer hover:text-[#833556] transition-colors duration-300"
-          onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
+          onClick={() => {
+            if (typeof window !== 'undefined') {
+              window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
+            }
+          }}
         >
           <div className="flex flex-col items-center animate-bounce">
             <span className="text-sm mb-2 font-medium">Discover Impact</span>

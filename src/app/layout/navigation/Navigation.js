@@ -7,9 +7,11 @@ const Navigation = () => {
   const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    if (typeof window !== 'undefined') {
+      const handleScroll = () => setScrollY(window.scrollY);
+      window.addEventListener('scroll', handleScroll);
+      return () => window.removeEventListener('scroll', handleScroll);
+    }
   }, []);
 
   const navItems = [
@@ -27,16 +29,20 @@ const Navigation = () => {
   const handleNavClick = (href) => {
     if (href === '#contact') {
       // Smooth scroll to contact section
-      const contactSection = document.getElementById('contact');
-      if (contactSection) {
-        contactSection.scrollIntoView({ 
-          behavior: 'smooth',
-          block: 'start'
-        });
+      if (typeof document !== 'undefined') {
+        const contactSection = document.getElementById('contact');
+        if (contactSection) {
+          contactSection.scrollIntoView({ 
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
       }
     } else {
       // Regular navigation
-      window.location.href = href;
+      if (typeof window !== 'undefined') {
+        window.location.href = href;
+      }
     }
     setIsMenuOpen(false);
   };

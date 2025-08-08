@@ -17,29 +17,33 @@ const ServicesSection = () => {
   const [isVisible, setIsVisible] = useState({});
 
   useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    if (typeof window !== 'undefined') {
+      const handleScroll = () => setScrollY(window.scrollY);
+      window.addEventListener("scroll", handleScroll);
+      return () => window.removeEventListener("scroll", handleScroll);
+    }
   }, []);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          setIsVisible((prev) => ({
-            ...prev,
-            [entry.target.id]: entry.isIntersecting,
-          }));
-        });
-      },
-      { threshold: 0.1, rootMargin: '100px' }
-    );
+    if (typeof window !== 'undefined' && typeof document !== 'undefined') {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            setIsVisible((prev) => ({
+              ...prev,
+              [entry.target.id]: entry.isIntersecting,
+            }));
+          });
+        },
+        { threshold: 0.1, rootMargin: '100px' }
+      );
 
-    document.querySelectorAll('[id]').forEach((el) => {
-      observer.observe(el);
-    });
+      document.querySelectorAll('[id]').forEach((el) => {
+        observer.observe(el);
+      });
 
-    return () => observer.disconnect();
+      return () => observer.disconnect();
+    }
   }, []);
 
   const services = [
@@ -318,7 +322,7 @@ const ServicesSection = () => {
                 <div className="relative mb-6 lg:mb-8">
                   <div className="relative inline-flex items-center justify-center w-16 h-16 lg:w-20 lg:h-20 rounded-2xl bg-gradient-to-br from-[#833556]/10 to-[#833556]/20 group-hover:from-[#833556] group-hover:to-[#a04066] transition-all duration-300 transform group-hover:scale-110 group-hover:rotate-3">
                     <service.icon 
-                      size={window.innerWidth < 768 ? 24 : 32} 
+                      size={typeof window !== 'undefined' && window.innerWidth < 768 ? 24 : 32} 
                       className="text-[#833556] group-hover:text-white transition-all duration-300 transform group-hover:scale-110" 
                     />
                     
