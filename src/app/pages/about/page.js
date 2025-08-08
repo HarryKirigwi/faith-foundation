@@ -111,135 +111,132 @@ export default function AboutPage() {
 
   return (
     <div className="relative min-h-screen bg-white overflow-x-hidden">
-      <style jsx>{`
-        @keyframes fadeInUp {
-          from {
-            opacity: 0;
-            transform: translateY(40px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-        
-        @keyframes fadeInScale {
-          from {
-            opacity: 0;
-            transform: scale(0.9);
-          }
-          to {
-            opacity: 1;
-            transform: scale(1);
-          }
-        }
-        
-        @keyframes slideInLeft {
-          from {
-            opacity: 0;
-            transform: translateX(-40px);
-          }
-          to {
-            opacity: 1;
-            transform: translateX(0);
-          }
-        }
-        
-        @keyframes slideInRight {
-          from {
-            opacity: 0;
-            transform: translateX(40px);
-          }
-          to {
-            opacity: 1;
-            transform: translateX(0);
-          }
-        }
-        
-        @keyframes float {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-10px); }
-        }
-        
-        @keyframes shimmer {
-          0% { transform: translateX(-100%); }
-          100% { transform: translateX(100%); }
-        }
-        
-        @keyframes pulse-glow {
-          0%, 100% { box-shadow: 0 0 20px rgba(131, 53, 86, 0.3); }
-          50% { box-shadow: 0 0 40px rgba(131, 53, 86, 0.6); }
-        }
-        
-        .animate-fadeInUp {
-          animation: fadeInUp 0.4s ease-out forwards;
-        }
-        
-        .animate-fadeInScale {
-          animation: fadeInScale 0.4s ease-out forwards;
-        }
-        
-        .animate-slideInLeft {
-          animation: slideInLeft 0.4s ease-out forwards;
-        }
-        
-        .animate-slideInRight {
-          animation: slideInRight 0.4s ease-out forwards;
-        }
-        
-        .animate-float {
-          animation: float 3s ease-in-out infinite;
-        }
-        
-        .glass-effect {
-          backdrop-filter: blur(20px);
-          background: rgba(255, 255, 255, 0.9);
-          border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        
-        .mobile-optimized {
-          -webkit-tap-highlight-color: transparent;
-          -webkit-touch-callout: none;
-          -webkit-user-select: none;
-        }
-        
-        @media (max-width: 768px) {
-          .mobile-hero-height {
-            min-height: 100vh;
-            min-height: 100svh;
-          }
-          
-          .mobile-card-spacing {
-            padding: 1.5rem;
-          }
-        }
-      `}</style>
 
-      {/* Hero Section with Background Image */}
-      <main className="relative mobile-hero-height">
-        {/* Background Image with Parallax */}
-        <div 
-          className="absolute inset-0 z-0"
-          style={{
-            transform: `translateY(${scrollY * 0.5}px)`,
-          }}
-        >
-          <img
-            src="/images/aboutbackground.jpg"
-            alt="Faith Feeds International community background"
-            className="w-full h-full object-cover scale-110"
-          />
-          {/* Enhanced Gradient Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/40"></div>
-          <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/60"></div>
-          <div className="absolute inset-0 bg-[#833556]/20"></div>
+
+      {/* Hero Section with Enhanced Animated Background */}
+      <main className="relative mobile-hero-height overflow-hidden">
+        {/* Multi-layer Animated Background */}
+        <div className="absolute inset-0 z-0">
+          {/* Primary gradient background */}
+          <div className="absolute inset-0 bg-gradient-to-br from-[#833556] via-[#a04066] to-[#833556]"></div>
+          
+          {/* Secondary animated gradient overlay */}
+          <div 
+            className="absolute inset-0 opacity-80"
+            style={{
+              background: `
+                radial-gradient(circle at 20% 30%, rgba(255, 215, 0, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(131, 53, 86, 0.4) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(160, 64, 102, 0.3) 0%, transparent 50%)
+              `,
+              animation: 'gradientShift 8s ease-in-out infinite'
+            }}
+          ></div>
+
+          {/* Floating geometric shapes */}
+          <div className="absolute inset-0 overflow-hidden">
+            <div 
+              className="absolute top-20 left-10 w-32 h-32 rounded-full opacity-20"
+              style={{
+                background: 'linear-gradient(45deg, #ffd700, #ffed4a)',
+                animation: 'float 6s ease-in-out infinite, rotate 20s linear infinite'
+              }}
+            />
+            <div 
+              className="absolute top-1/3 right-20 w-24 h-24 rounded-lg opacity-15"
+              style={{
+                background: 'linear-gradient(45deg, rgba(255,255,255,0.3), rgba(255,255,255,0.1))',
+                animation: 'float 8s ease-in-out infinite reverse, rotate 15s linear infinite reverse',
+                animationDelay: '2s'
+              }}
+            />
+            <div 
+              className="absolute bottom-1/4 left-1/4 w-20 h-20 rounded-full opacity-25"
+              style={{
+                background: 'linear-gradient(45deg, rgba(131, 53, 86, 0.4), rgba(160, 64, 102, 0.2))',
+                animation: 'float 7s ease-in-out infinite, pulse 4s ease-in-out infinite',
+                animationDelay: '4s'
+              }}
+            />
+            <div 
+              className="absolute top-1/2 left-10 w-16 h-16 rounded-lg opacity-20"
+              style={{
+                background: 'linear-gradient(45deg, rgba(255,255,255,0.2), transparent)',
+                animation: 'float 9s ease-in-out infinite, rotate 25s linear infinite',
+                animationDelay: '1s'
+              }}
+            />
+            <div 
+              className="absolute bottom-20 right-1/4 w-28 h-28 rounded-full opacity-15"
+              style={{
+                background: 'radial-gradient(circle, rgba(255, 215, 0, 0.3), transparent)',
+                animation: 'float 5s ease-in-out infinite, pulse 6s ease-in-out infinite',
+                animationDelay: '3s'
+              }}
+            />
+          </div>
+
+          {/* Animated pattern overlay */}
+          <div 
+            className="absolute inset-0 opacity-10"
+            style={{
+              backgroundImage: `
+                radial-gradient(circle at 30px 30px, rgba(255,255,255,0.3) 2px, transparent 0),
+                radial-gradient(circle at 80px 80px, rgba(255,215,0,0.2) 1px, transparent 0)
+              `,
+              backgroundSize: '120px 120px, 160px 160px',
+              animation: 'patternMove 20s linear infinite'
+            }}
+          ></div>
+
+          {/* Subtle noise texture */}
+          <div 
+            className="absolute inset-0 opacity-5"
+            style={{
+              backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='1' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+            }}
+          ></div>
         </div>
 
-        {/* Floating Background Elements */}
+        {/* Enhanced Floating Background Elements */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none z-5">
-          <div className="absolute top-20 left-10 w-32 h-32 bg-[#ffd700]/20 rounded-full blur-3xl animate-float" />
-          <div className="absolute top-40 right-20 w-24 h-24 bg-white/10 rounded-full blur-2xl animate-float" style={{ animationDelay: '1s' }} />
-          <div className="absolute bottom-40 left-1/4 w-20 h-20 bg-[#833556]/30 rounded-full blur-2xl animate-float" style={{ animationDelay: '2s' }} />
+          {/* Large floating orbs */}
+          <div 
+            className="absolute top-32 left-16 w-64 h-64 rounded-full opacity-10"
+            style={{
+              background: 'radial-gradient(circle, rgba(255,215,0,0.4), transparent)',
+              filter: 'blur(40px)',
+              animation: 'float 12s ease-in-out infinite, scale 8s ease-in-out infinite'
+            }}
+          />
+          <div 
+            className="absolute bottom-32 right-16 w-48 h-48 rounded-full opacity-15"
+            style={{
+              background: 'radial-gradient(circle, rgba(255,255,255,0.3), transparent)',
+              filter: 'blur(30px)',
+              animation: 'float 10s ease-in-out infinite reverse, scale 6s ease-in-out infinite',
+              animationDelay: '3s'
+            }}
+          />
+          
+          {/* Medium floating elements */}
+          <div 
+            className="absolute top-1/4 right-1/4 w-32 h-32 rounded-full opacity-20"
+            style={{
+              background: 'linear-gradient(45deg, rgba(131,53,86,0.3), rgba(160,64,102,0.1))',
+              filter: 'blur(20px)',
+              animation: 'float 8s ease-in-out infinite, rotate 15s linear infinite'
+            }}
+          />
+          <div 
+            className="absolute bottom-1/3 left-1/3 w-24 h-24 rounded-lg opacity-25"
+            style={{
+              background: 'linear-gradient(45deg, rgba(255,215,0,0.2), transparent)',
+              filter: 'blur(15px)',
+              animation: 'float 14s ease-in-out infinite, rotate 20s linear infinite reverse',
+              animationDelay: '2s'
+            }}
+          />
         </div>
 
         {/* Hero Content */}
@@ -250,30 +247,47 @@ export default function AboutPage() {
               isVisible['hero-content'] ? 'animate-fadeInUp' : 'opacity-0'
             }`}
           >
-            {/* Badge */}
-            <div className="inline-flex items-center px-6 py-3 rounded-full bg-white/20 backdrop-blur-lg text-white text-sm font-medium mb-8 border border-white/30 glass-effect">
-              <BookOpen size={16} className="mr-2" />
-              About Our Mission
+            {/* Enhanced Badge */}
+            <div className="inline-flex items-center px-6 py-3 rounded-full bg-white/20 backdrop-blur-lg text-white text-sm font-medium mb-8 border border-white/30 glass-effect relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full animate-shimmer"></div>
+              <BookOpen size={16} className="mr-2 relative z-10" />
+              <span className="relative z-10">About Our Mission</span>
             </div>
 
-            {/* Main Heading */}
-            <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold text-white leading-tight mb-6 drop-shadow-2xl">
-              About
-              <span className="text-[#ffd700] block mt-2 drop-shadow-2xl bg-gradient-to-r from-[#ffd700] to-[#ffed4a] bg-clip-text text-transparent">
+            {/* Main Heading with enhanced effects */}
+            <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold text-white leading-tight mb-6 relative">
+              <span className="relative z-10 drop-shadow-2xl">About</span>
+              <span 
+                className="text-[#ffd700] block mt-2 drop-shadow-2xl relative z-10"
+                style={{
+                  background: 'linear-gradient(45deg, #ffd700, #ffed4a, #ffd700)',
+                  backgroundSize: '200% 200%',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  animation: 'gradientShift 3s ease-in-out infinite'
+                }}
+              >
                 Faith Feeds International
               </span>
+              {/* Text glow effect */}
+              <div className="absolute inset-0 text-4xl sm:text-5xl lg:text-7xl font-bold opacity-30 blur-sm">
+                About
+                <span className="text-[#ffd700] block mt-2">
+                  Faith Feeds International
+                </span>
+              </div>
             </h1>
 
-            {/* Subtitle */}
-            <p className="text-lg sm:text-xl lg:text-2xl text-white/95 leading-relaxed max-w-4xl mx-auto drop-shadow-lg mb-8">
+            {/* Enhanced Subtitle */}
+            <p className="text-lg sm:text-xl lg:text-2xl text-white/95 leading-relaxed max-w-4xl mx-auto drop-shadow-lg mb-8 relative z-10">
               A faith-led initiative dedicated to restoring dignity through uplifting vulnerable communities 
               while empowering youth to lead change through service and leadership.
             </p>
 
             {/* Enhanced CTA Button */}
             <div className="mt-8">
-              <button className="group relative px-8 py-4 lg:px-10 lg:py-5 bg-[#833556] text-white font-bold text-lg lg:text-xl rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-105 transform hover:-translate-y-2 flex items-center justify-center gap-3 mx-auto mobile-optimized overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-r from-[#833556] via-[#a04066] to-[#833556] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <button className="group relative px-8 py-4 lg:px-10 lg:py-5 bg-white/10 backdrop-blur-lg border-2 border-white/30 text-white font-bold text-lg lg:text-xl rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-105 transform hover:-translate-y-2 flex items-center justify-center gap-3 mx-auto mobile-optimized overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-r from-white/20 via-white/30 to-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-600" />
                 <Heart size={24} className="relative z-10 group-hover:animate-pulse" />
                 <span className="relative z-10">Learn More About Us</span>
@@ -281,15 +295,19 @@ export default function AboutPage() {
               </button>
             </div>
 
-            {/* Scroll Indicator */}
-            <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white/70 animate-bounce">
+            {/* Enhanced Scroll Indicator */}
+            <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white/80 animate-bounce">
               <div className="flex flex-col items-center">
                 <span className="text-sm mb-2 font-medium">Discover Our Story</span>
-                <ChevronDown size={24} />
+                <div className="w-6 h-10 border-2 border-white/60 rounded-full flex justify-center">
+                  <div className="w-1 h-3 bg-white/80 rounded-full mt-2 animate-pulse" />
+                </div>
               </div>
             </div>
           </div>
         </div>
+
+
       </main>
 
       {/* Main About Content */}
