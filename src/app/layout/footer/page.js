@@ -178,7 +178,7 @@ const FaithFeedsFooter = () => {
                 placeholder="Enter your email address"
                 className="flex-1 px-4 py-3 bg-gray-800 text-white rounded-lg border border-gray-700 focus:border-[#833556] focus:outline-none focus:ring-2 focus:ring-[#833556]/20 transition-all duration-300"
               />
-              <button className="px-6 py-3 bg-[#833556] text-white font-semibold rounded-lg hover:bg-[#a04066] transition-all duration-300 hover:scale-105 transform flex items-center justify-center gap-2">
+              <button className="cursor-pointer px-6 py-3 bg-[#833556] text-white font-semibold rounded-lg hover:bg-[#a04066] transition-all duration-300 hover:scale-105 transform flex items-center justify-center gap-2">
                 <Mail size={16} />
                 Subscribe
               </button>

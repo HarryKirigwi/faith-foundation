@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   Wheat, 
   GraduationCap, 
@@ -6,11 +6,41 @@ import {
   Droplets, 
   Heart, 
   Users,
-  ArrowRight
+  ArrowRight,
+  Sparkles,
+  Globe
 } from 'lucide-react';
 
 const ServicesSection = () => {
   const [hoveredCard, setHoveredCard] = useState(null);
+  const [scrollY, setScrollY] = useState(0);
+  const [isVisible, setIsVisible] = useState({});
+
+  useEffect(() => {
+    const handleScroll = () => setScrollY(window.scrollY);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          setIsVisible((prev) => ({
+            ...prev,
+            [entry.target.id]: entry.isIntersecting,
+          }));
+        });
+      },
+      { threshold: 0.1, rootMargin: '100px' }
+    );
+
+    document.querySelectorAll('[id]').forEach((el) => {
+      observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, []);
 
   const services = [
     {
@@ -19,7 +49,9 @@ const ServicesSection = () => {
       title: "Healthy Food",
       description: "Providing nutritious food to families in need, ensuring no one goes hungry in our communities.",
       buttonText: "Make a Donation",
-      buttonAction: "donate"
+      buttonAction: "donate",
+      stats: "50K+ meals served",
+      gradient: "from-orange-400 to-orange-600"
     },
     {
       id: 2,
@@ -27,7 +59,9 @@ const ServicesSection = () => {
       title: "Education",
       description: "Supporting youth with educational programs and mentorship opportunities for a brighter future.",
       buttonText: "Join Us",
-      buttonAction: "volunteer"
+      buttonAction: "volunteer",
+      stats: "2K+ students helped",
+      gradient: "from-blue-400 to-blue-600"
     },
     {
       id: 3,
@@ -35,7 +69,9 @@ const ServicesSection = () => {
       title: "Medical Care",
       description: "Offering free medical camps and healthcare services to underserved communities worldwide.",
       buttonText: "Make a Donation",
-      buttonAction: "donate"
+      buttonAction: "donate",
+      stats: "15K+ patients treated",
+      gradient: "from-green-400 to-green-600"
     },
     {
       id: 4,
@@ -43,7 +79,9 @@ const ServicesSection = () => {
       title: "Clean Water",
       description: "Installing clean water systems in rural and marginalized areas to improve quality of life.",
       buttonText: "Make a Donation",
-      buttonAction: "donate"
+      buttonAction: "donate",
+      stats: "120+ wells built",
+      gradient: "from-cyan-400 to-cyan-600"
     },
     {
       id: 5,
@@ -51,7 +89,9 @@ const ServicesSection = () => {
       title: "Love & Care",
       description: "Providing emotional and spiritual support for families and individuals in times of need.",
       buttonText: "Share With Us",
-      buttonAction: "share"
+      buttonAction: "share",
+      stats: "8K+ families supported",
+      gradient: "from-pink-400 to-pink-600"
     },
     {
       id: 6,
@@ -59,7 +99,9 @@ const ServicesSection = () => {
       title: "Community Volunteering",
       description: "Participating in volunteering activities such as health awareness education and community development.",
       buttonText: "Join Us",
-      buttonAction: "volunteer"
+      buttonAction: "volunteer",
+      stats: "500+ active volunteers",
+      gradient: "from-purple-400 to-purple-600"
     }
   ];
 
@@ -68,111 +110,319 @@ const ServicesSection = () => {
   };
 
   const getButtonStyles = (action) => {
-    const baseStyles = "group relative px-6 py-3 font-semibold text-sm rounded-xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 flex items-center justify-center gap-2";
+    const baseStyles = "group relative px-6 py-3 font-semibold text-sm rounded-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 flex items-center justify-center gap-2 cursor-pointer overflow-hidden mobile-optimized";
     
     switch (action) {
       case 'donate':
-        return `${baseStyles} bg-[#833556] text-white shadow-lg hover:shadow-xl`;
+        return `${baseStyles} bg-[#833556] text-white shadow-xl hover:shadow-2xl`;
       case 'volunteer':
         return `${baseStyles} bg-transparent border-2 border-[#833556] text-[#833556] hover:bg-[#833556] hover:text-white`;
       case 'share':
-        return `${baseStyles} bg-gray-100 text-gray-700 hover:bg-gray-200 border border-gray-300`;
+        return `${baseStyles} bg-gradient-to-r from-gray-100 to-gray-200 text-gray-700 hover:from-gray-200 hover:to-gray-300 border border-gray-300`;
       default:
         return `${baseStyles} bg-gray-100 text-gray-700 hover:bg-gray-200`;
     }
   };
 
   return (
-    <section className="relative py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
-      <div className="max-w-7xl mx-auto">
-        {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-            Our <span className="text-[#833556]">Impact Areas</span>
-          </h2>
-          <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Discover how we're making a difference in communities worldwide through our comprehensive programs and initiatives.
-          </p>
-          <div className="mt-6 w-24 h-1 bg-[#833556] mx-auto rounded-full" />
-        </div>
+    <div className="relative">
+      <style jsx>{`
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(50px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        
+        @keyframes fadeInScale {
+          from {
+            opacity: 0;
+            transform: scale(0.8);
+          }
+          to {
+            opacity: 1;
+            transform: scale(1);
+          }
+        }
+        
+        @keyframes slideInLeft {
+          from {
+            opacity: 0;
+            transform: translateX(-50px);
+          }
+          to {
+            opacity: 1;
+            transform: translateX(0);
+          }
+        }
+        
+        @keyframes slideInRight {
+          from {
+            opacity: 0;
+            transform: translateX(50px);
+          }
+          to {
+            opacity: 1;
+            transform: translateX(0);
+          }
+        }
+        
+        @keyframes float {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-8px); }
+        }
+        
+        @keyframes shimmer {
+          0% { transform: translateX(-100%); }
+          100% { transform: translateX(100%); }
+        }
+        
+        .animate-fadeInUp {
+          animation: fadeInUp 0.4s ease-out forwards;
+        }
+        
+        .animate-fadeInScale {
+          animation: fadeInScale 0.4s ease-out forwards;
+        }
+        
+        .animate-slideInLeft {
+          animation: slideInLeft 0.4s ease-out forwards;
+        }
+        
+        .animate-slideInRight {
+          animation: slideInRight 0.4s ease-out forwards;
+        }
+        
+        .animate-float {
+          animation: float 3s ease-in-out infinite;
+        }
+        
+        .shimmer-effect {
+          position: relative;
+          overflow: hidden;
+        }
+        
+        .shimmer-effect::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(
+            90deg,
+            transparent,
+            rgba(255, 255, 255, 0.4),
+            transparent
+          );
+          transform: translateX(-100%);
+          animation: shimmer 2s infinite;
+        }
+        
+        .glass-effect {
+          backdrop-filter: blur(20px);
+          background: rgba(255, 255, 255, 0.9);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .mobile-optimized {
+          -webkit-tap-highlight-color: transparent;
+          -webkit-touch-callout: none;
+          -webkit-user-select: none;
+        }
+        
+        @media (max-width: 768px) {
+          .mobile-card-spacing {
+            padding: 1.5rem;
+          }
+        }
+      `}</style>
 
-        {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {services.map((service, index) => (
-            <div
-              key={service.id}
-              className="group bg-white p-8 rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-2 border border-gray-100 relative overflow-hidden"
-              onMouseEnter={() => setHoveredCard(service.id)}
-              onMouseLeave={() => setHoveredCard(null)}
-            >
-              {/* Subtle hover background */}
-              <div className="absolute inset-0 bg-gradient-to-br from-[#833556]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              
-              {/* Icon Container */}
-              <div className="relative mb-6 inline-flex items-center justify-center w-16 h-16 rounded-xl bg-[#833556]/10 group-hover:bg-[#833556] transition-all duration-300">
-                <service.icon size={28} className="text-[#833556] group-hover:text-white transition-colors duration-300" />
+      <section className="relative py-16 lg:py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-gray-50 via-white to-gray-50">
+        <div className="max-w-7xl mx-auto">
+          {/* Floating Background Elements */}
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            <div 
+              className="absolute top-20 left-10 w-32 h-32 bg-[#833556]/10 rounded-full blur-2xl animate-float"
+              style={{ animationDelay: '0s' }}
+            />
+            <div 
+              className="absolute top-40 right-20 w-24 h-24 bg-orange-400/10 rounded-full blur-2xl animate-float"
+              style={{ animationDelay: '1s' }}
+            />
+            <div 
+              className="absolute bottom-40 left-1/4 w-20 h-20 bg-blue-400/10 rounded-full blur-2xl animate-float"
+              style={{ animationDelay: '2s' }}
+            />
+          </div>
+
+          {/* Section Header */}
+          <div 
+            id="services-header"
+            className={`text-center mb-16 lg:mb-20 ${
+              isVisible['services-header'] ? 'animate-fadeInUp' : 'opacity-0'
+            }`}
+          >
+            {/* Badge */}
+            <div className="inline-flex items-center px-4 py-2 rounded-full bg-[#833556]/10 text-[#833556] text-sm font-medium mb-6 glass-effect">
+              <Sparkles size={16} className="mr-2" />
+              Our Impact Areas
+            </div>
+
+            <h2 className="text-3xl sm:text-4xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+              Transforming Communities
+              <span className="block text-[#833556] bg-gradient-to-r from-[#833556] to-[#a04066] bg-clip-text text-transparent mt-2">
+                Around the World
+              </span>
+            </h2>
+            
+            <p className="text-base sm:text-lg lg:text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed mb-8">
+              Discover how we're making a difference in communities worldwide through our comprehensive programs and initiatives that create lasting, meaningful change.
+            </p>
+            
+            {/* Animated Underline */}
+            <div className="relative mx-auto w-32 h-1 bg-gradient-to-r from-[#833556] to-[#a04066] rounded-full overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/50 to-transparent shimmer-effect" />
+            </div>
+          </div>
+
+          {/* Services Grid */}
+          <div 
+            id="services-grid"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-16 lg:mb-20"
+          >
+            {services.map((service, index) => (
+              <div
+                key={service.id}
+                id={`service-${service.id}`}
+                className={`group relative bg-white mobile-card-spacing p-6 lg:p-8 rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-400 hover:-translate-y-4 border border-gray-100 overflow-hidden mobile-optimized ${
+                  isVisible[`service-${service.id}`] 
+                    ? index % 2 === 0 ? 'animate-slideInLeft' : 'animate-slideInRight'
+                    : 'opacity-0'
+                }`}
+                style={{ animationDelay: `${index * 0.1}s` }}
+                onMouseEnter={() => setHoveredCard(service.id)}
+                onMouseLeave={() => setHoveredCard(null)}
+              >
+                {/* Gradient Background on Hover */}
+                <div className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-400`} />
+                
+                {/* Animated Border */}
+                <div className="absolute inset-0 rounded-3xl border-2 border-transparent bg-gradient-to-r from-[#833556]/20 via-transparent to-[#833556]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                
+                {/* Icon Container with Enhanced Animation */}
+                <div className="relative mb-6 lg:mb-8">
+                  <div className="relative inline-flex items-center justify-center w-16 h-16 lg:w-20 lg:h-20 rounded-2xl bg-gradient-to-br from-[#833556]/10 to-[#833556]/20 group-hover:from-[#833556] group-hover:to-[#a04066] transition-all duration-300 transform group-hover:scale-110 group-hover:rotate-3">
+                    <service.icon 
+                      size={window.innerWidth < 768 ? 24 : 32} 
+                      className="text-[#833556] group-hover:text-white transition-all duration-300 transform group-hover:scale-110" 
+                    />
+                    
+                    {/* Floating Ring Animation */}
+                    <div className="absolute inset-0 rounded-2xl border-2 border-[#833556]/20 group-hover:border-[#833556]/40 transition-colors duration-300 animate-ping group-hover:animate-pulse" />
+                  </div>
+                  
+                  {/* Stats Badge */}
+                  <div className="absolute -top-2 -right-2 bg-white shadow-lg rounded-full px-3 py-1 text-xs font-semibold text-[#833556] border border-gray-100 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
+                    {service.stats}
+                  </div>
+                </div>
+
+                {/* Content */}
+                <div className="relative z-10">
+                  <h3 className="text-xl lg:text-2xl font-bold text-gray-900 mb-4 group-hover:text-gray-800 transition-colors duration-300">
+                    {service.title}
+                  </h3>
+                  
+                  <p className="text-gray-600 text-sm lg:text-base mb-6 lg:mb-8 leading-relaxed group-hover:text-gray-700 transition-colors duration-300">
+                    {service.description}
+                  </p>
+
+                  {/* Action Button with Enhanced Effects */}
+                  <button
+                    onClick={() => handleButtonClick(service.buttonAction, service.title)}
+                    className={`${getButtonStyles(service.buttonAction)} w-full sm:w-auto`}
+                  >
+                    {/* Button shimmer effect */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-600" />
+                    
+                    <span className="relative z-10">{service.buttonText}</span>
+                    <ArrowRight size={16} className="relative z-10 group-hover:translate-x-1 transition-transform duration-200" />
+                  </button>
+                </div>
+
+                {/* Hover glow effect */}
+                <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-[#833556]/10 via-transparent to-[#833556]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-400 blur-xl" />
               </div>
+            ))}
+          </div>
 
-              {/* Content */}
+          {/* Enhanced Call to Action */}
+          <div 
+            id="services-cta"
+            className={`${
+              isVisible['services-cta'] ? 'animate-fadeInScale' : 'opacity-0'
+            }`}
+          >
+            <div className="relative overflow-hidden bg-gradient-to-r from-[#833556] to-[#a04066] rounded-3xl p-8 lg:p-12 text-center shadow-2xl">
+              {/* Background Pattern */}
+              <div className="absolute inset-0 opacity-10">
+                <div className="absolute inset-0" style={{
+                  backgroundImage: `radial-gradient(circle at 20px 20px, white 2px, transparent 0)`,
+                  backgroundSize: '40px 40px'
+                }} />
+              </div>
+              
+              {/* Floating Elements */}
+              <div className="absolute top-4 left-4 w-16 h-16 bg-white/10 rounded-full animate-float" />
+              <div className="absolute bottom-4 right-4 w-12 h-12 bg-white/10 rounded-full animate-float" style={{ animationDelay: '1s' }} />
+              
               <div className="relative z-10">
-                <h3 className="text-xl font-bold text-gray-900 mb-4 group-hover:text-gray-800 transition-colors duration-300">
-                  {service.title}
+                <div className="inline-flex items-center justify-center w-16 h-16 lg:w-20 lg:h-20 bg-white/20 rounded-2xl mb-6 backdrop-blur-sm">
+                  <Globe size={32} className="text-white" />
+                </div>
+                
+                <h3 className="text-2xl lg:text-4xl font-bold text-white mb-4">
+                  Ready to make a difference?
                 </h3>
                 
-                <p className="text-gray-600 mb-6 leading-relaxed group-hover:text-gray-700 transition-colors duration-300">
-                  {service.description}
+                <p className="text-lg text-white/90 mb-8 max-w-2xl mx-auto">
+                  Join our mission to transform lives through faith and community. Every action counts, every donation matters.
                 </p>
-
-                {/* Action Button */}
-                <button
-                  onClick={() => handleButtonClick(service.buttonAction, service.title)}
-                  className={getButtonStyles(service.buttonAction)}
-                >
-                  {service.buttonText}
-                  <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform duration-300" />
-                </button>
+                
+                <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                  <button className="group relative px-8 py-4 bg-white text-[#833556] font-bold text-lg rounded-2xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 flex items-center gap-3 mobile-optimized overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-r from-gray-50 to-white opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
+                    <Heart size={20} className="relative z-10 group-hover:animate-pulse" />
+                    <span className="relative z-10">Get Started Today</span>
+                    <ArrowRight size={20} className="relative z-10 group-hover:translate-x-1 transition-transform duration-200" />
+                  </button>
+                  
+                  <button className="group px-8 py-4 bg-transparent border-2 border-white/30 text-white font-bold text-lg rounded-2xl hover:border-white hover:bg-white/10 transition-all duration-300 transform hover:scale-105 mobile-optimized">
+                    Learn More
+                  </button>
+                </div>
               </div>
-
-              {/* Hover border effect */}
-              <div className="absolute inset-0 border-2 border-[#833556] rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-            </div>
-          ))}
-        </div>
-
-        {/* Call to Action */}
-        <div className="mt-16 text-center">
-          <div className="inline-flex flex-col sm:flex-row items-center gap-4 sm:gap-6 p-6 bg-white rounded-xl shadow-sm border border-gray-100">
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 bg-[#833556]/10 rounded-full flex items-center justify-center">
-                <Heart size={20} className="text-[#833556]" />
-              </div>
-              <div className="text-left">
-                <h3 className="text-lg font-semibold text-gray-900">Ready to make a difference?</h3>
-                <p className="text-sm text-gray-600">Join our mission to transform lives through faith and community.</p>
-              </div>
-            </div>
-            
-            <div className="flex flex-col sm:flex-row gap-3">
-              <button className="px-6 py-3 bg-[#833556] text-white font-semibold rounded-xl hover:shadow-lg transform hover:scale-105 transition-all duration-300 flex items-center gap-2">
-                Get Started
-                <ArrowRight size={16} />
-              </button>
-              <button className="px-6 py-3 bg-transparent border-2 border-gray-300 text-gray-700 font-semibold rounded-xl hover:border-[#833556] hover:text-[#833556] transition-all duration-300">
-                Learn More
-              </button>
             </div>
           </div>
         </div>
-      </div>
 
-      {/* Subtle Background Pattern */}
-      <div className="absolute inset-0 pointer-events-none opacity-5">
-        <div className="absolute inset-0" style={{
-          backgroundImage: `radial-gradient(circle at 2px 2px, #833556 1px, transparent 0)`,
-          backgroundSize: '40px 40px'
-        }}></div>
-      </div>
-    </section>
+        {/* Enhanced Background Pattern */}
+        <div className="absolute inset-0 pointer-events-none opacity-[0.02]">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `
+              radial-gradient(circle at 25px 25px, #833556 2px, transparent 0),
+              radial-gradient(circle at 75px 75px, #a04066 1px, transparent 0)
+            `,
+            backgroundSize: '100px 100px'
+          }} />
+        </div>
+      </section>
+    </div>
   );
 };
 

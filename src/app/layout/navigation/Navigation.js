@@ -19,7 +19,7 @@ const Navigation = () => {
     { name: 'Projects', href: '/pages/projects' },
     { name: 'Volunteer', href: '/pages/volunteer' },
     { name: 'Faith Feeds International Blog', href: '/pages/blog' },
-    { name: 'Contact', href: '#contact' }
+    { name: 'Contact', href: '/pages/about#contact' }
   ];
 
   const isScrolled = scrollY > 50;
