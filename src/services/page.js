@@ -1,18 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { 
-  Wheat, 
-  GraduationCap, 
-  Stethoscope, 
-  Droplets, 
-  Heart, 
-  Users,
-  ArrowRight,
-  Sparkles,
-  Globe
-} from 'lucide-react';
+"use client";
+import React, { useState, useEffect } from "react";
+import { Heart, Target, Users, Lightbulb, Globe, ArrowRight, ChevronDown, Star, Shield, BookOpen, HandHeart, Play, Award, Clock, MapPin, Phone, Mail } from "lucide-react";
+import { STRIPE_DONATION_LINK } from "@/config/constants";
 
 const ServicesSection = () => {
-  const [hoveredCard, setHoveredCard] = useState(null);
   const [scrollY, setScrollY] = useState(0);
   const [isVisible, setIsVisible] = useState({});
 
@@ -42,75 +33,84 @@ const ServicesSection = () => {
         observer.observe(el);
       });
 
+      // Check if elements are already in view on page load
+      const checkInitialVisibility = () => {
+        document.querySelectorAll('[id]').forEach((el) => {
+          const rect = el.getBoundingClientRect();
+          const isInView = rect.top < window.innerHeight && rect.bottom > 0;
+          if (isInView) {
+            setIsVisible((prev) => ({
+              ...prev,
+              [el.id]: true,
+            }));
+          }
+        });
+      };
+
+      // Check immediately and after a short delay to ensure proper timing
+      checkInitialVisibility();
+      setTimeout(checkInitialVisibility, 200);
+
       return () => observer.disconnect();
     }
   }, []);
 
   const services = [
     {
-      id: 1,
-      icon: Wheat,
-      title: "Healthy Food",
-      description: "Providing nutritious food to families in need, ensuring no one goes hungry in our communities.",
-      buttonText: "Make a Donation",
-      buttonAction: "donate",
-      stats: "50K+ meals served",
-      gradient: "from-orange-400 to-orange-600"
-    },
-    {
-      id: 2,
-      icon: GraduationCap,
-      title: "Education",
-      description: "Supporting youth with educational programs and mentorship opportunities for a brighter future.",
-      buttonText: "Join Us",
-      buttonAction: "volunteer",
-      stats: "2K+ students helped",
-      gradient: "from-blue-400 to-blue-600"
-    },
-    {
-      id: 3,
-      icon: Stethoscope,
-      title: "Medical Care",
-      description: "Offering free medical camps and healthcare services to underserved communities worldwide.",
-      buttonText: "Make a Donation",
-      buttonAction: "donate",
-      stats: "15K+ patients treated",
-      gradient: "from-green-400 to-green-600"
-    },
-    {
-      id: 4,
-      icon: Droplets,
-      title: "Clean Water",
-      description: "Installing clean water systems in rural and marginalized areas to improve quality of life.",
-      buttonText: "Make a Donation",
-      buttonAction: "donate",
-      stats: "120+ wells built",
-      gradient: "from-cyan-400 to-cyan-600"
-    },
-    {
-      id: 5,
-      icon: Heart,
-      title: "Love & Care",
-      description: "Providing emotional and spiritual support for families and individuals in times of need.",
-      buttonText: "Share With Us",
-      buttonAction: "share",
-      stats: "8K+ families supported",
-      gradient: "from-pink-400 to-pink-600"
-    },
-    {
-      id: 6,
+      title: "Youth Empowerment Programs",
+      description: "Comprehensive programs designed to empower young people with life skills, education, and leadership development opportunities.",
       icon: Users,
-      title: "Community Volunteering",
-      description: "Participating in volunteering activities such as health awareness education and community development.",
-      buttonText: "Join Us",
-      buttonAction: "volunteer",
-      stats: "500+ active volunteers",
-      gradient: "from-purple-400 to-purple-600"
+      features: ["Life Skills Training", "Leadership Development", "Educational Support", "Mentorship Programs"],
+      buttonText: "Support Youth",
+      buttonAction: "donate",
+      color: "from-blue-500 to-purple-600"
+    },
+    {
+      title: "Community Outreach Initiatives",
+      description: "Local and international community outreach programs that address immediate needs and build sustainable solutions.",
+      icon: Globe,
+      features: ["Emergency Relief", "Community Building", "Sustainable Development", "Partnership Programs"],
+      buttonText: "Donate Now",
+      buttonAction: "donate",
+      color: "from-green-500 to-teal-600"
+    },
+    {
+      title: "Faith-Based Counseling",
+      description: "Spiritual and emotional support services that help individuals and families navigate life's challenges with faith and hope.",
+      icon: Heart,
+      features: ["Individual Counseling", "Family Support", "Spiritual Guidance", "Crisis Intervention"],
+      buttonText: "Support Counseling",
+      buttonAction: "donate",
+      color: "from-pink-500 to-rose-600"
     }
   ];
 
   const handleButtonClick = (action, title) => {
-    console.log(`${action} clicked for ${title}`);
+    switch (action) {
+      case 'donate':
+        window.open(STRIPE_DONATION_LINK, '_blank');
+        break;
+      case 'volunteer':
+        // Navigate to volunteer page or open volunteer form
+        console.log(`Volunteer clicked for ${title}`);
+        break;
+      case 'share':
+        // Share functionality
+        if (navigator.share) {
+          navigator.share({
+            title: 'Faith Feeds International',
+            text: `Check out this amazing program: ${title}`,
+            url: window.location.href
+          });
+        } else {
+          // Fallback for browsers that don't support Web Share API
+          navigator.clipboard.writeText(window.location.href);
+          alert('Link copied to clipboard!');
+        }
+        break;
+      default:
+        console.log(`${action} clicked for ${title}`);
+    }
   };
 
   const getButtonStyles = (action) => {
@@ -273,7 +273,7 @@ const ServicesSection = () => {
           >
             {/* Badge */}
             <div className="inline-flex items-center px-4 py-2 rounded-full bg-[#833556]/10 text-[#833556] text-sm font-medium mb-6 glass-effect">
-              <Sparkles size={16} className="mr-2" />
+              <Star size={16} className="mr-2" />
               Our Impact Areas
             </div>
 
@@ -301,19 +301,17 @@ const ServicesSection = () => {
           >
             {services.map((service, index) => (
               <div
-                key={service.id}
-                id={`service-${service.id}`}
+                key={service.title}
+                id={`service-${index}`}
                 className={`group relative bg-white mobile-card-spacing p-6 lg:p-8 rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-400 hover:-translate-y-4 border border-gray-100 overflow-hidden mobile-optimized ${
-                  isVisible[`service-${service.id}`] 
+                  isVisible[`service-${index}`] 
                     ? index % 2 === 0 ? 'animate-slideInLeft' : 'animate-slideInRight'
                     : 'opacity-0'
                 }`}
                 style={{ animationDelay: `${index * 0.1}s` }}
-                onMouseEnter={() => setHoveredCard(service.id)}
-                onMouseLeave={() => setHoveredCard(null)}
               >
                 {/* Gradient Background on Hover */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-400`} />
+                <div className={`absolute inset-0 bg-gradient-to-br ${service.color} opacity-0 group-hover:opacity-5 transition-opacity duration-400`} />
                 
                 {/* Animated Border */}
                 <div className="absolute inset-0 rounded-3xl border-2 border-transparent bg-gradient-to-r from-[#833556]/20 via-transparent to-[#833556]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -332,7 +330,7 @@ const ServicesSection = () => {
                   
                   {/* Stats Badge */}
                   <div className="absolute -top-2 -right-2 bg-white shadow-lg rounded-full px-3 py-1 text-xs font-semibold text-[#833556] border border-gray-100 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
-                    {service.stats}
+                    {service.features.length} Features
                   </div>
                 </div>
 
@@ -401,7 +399,7 @@ const ServicesSection = () => {
                 <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                   <button className="group relative px-8 py-4 bg-white text-[#833556] font-bold text-lg rounded-2xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 flex items-center gap-3 mobile-optimized overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-r from-gray-50 to-white opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
-                    <Heart size={20} className="relative z-10 group-hover:animate-pulse" />
+                    <HandHeart size={20} className="relative z-10 group-hover:animate-pulse" />
                     <span className="relative z-10">Get Started Today</span>
                     <ArrowRight size={20} className="relative z-10 group-hover:translate-x-1 transition-transform duration-200" />
                   </button>

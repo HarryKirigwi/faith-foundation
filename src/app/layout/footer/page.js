@@ -1,22 +1,24 @@
+'use client'
 import React from 'react';
 import { 
   Heart, 
   Globe, 
-  Mail, 
-  Phone, 
+  ArrowRight, 
   MapPin, 
+  Phone, 
+  Mail,
+  BookOpen,
+  HandHeart, 
   Facebook, 
   Twitter, 
   Instagram, 
-  Linkedin,
-  ArrowRight,
-  BookOpen,
-  Users,
-  HandHeart
+  Linkedin 
 } from 'lucide-react';
+import { STRIPE_DONATION_LINK } from '@/config/constants';
 
 const FaithFeedsFooter = () => {
   const quickLinks = [
+    { name: 'Home', href: '/' },
     { name: 'About Us', href: '/pages/about' },
     { name: 'What We Do', href: '/pages/whatwedo' },
     { name: 'Projects', href: '/pages/projects' },
@@ -25,7 +27,7 @@ const FaithFeedsFooter = () => {
   ];
 
   const supportLinks = [
-    { name: 'Donate Now', href: '#donate' },
+    { name: 'Donate Now', href: STRIPE_DONATION_LINK, external: true },
     { name: 'Monthly Giving', href: '#monthly-giving' },
     { name: 'Corporate Partnerships', href: '#partnerships' },
     { name: 'Fundraising Events', href: '#events' },
@@ -128,6 +130,8 @@ const FaithFeedsFooter = () => {
                 <li key={link.name}>
                   <a
                     href={link.href}
+                    target={link.external ? "_blank" : undefined}
+                    rel={link.external ? "noopener noreferrer" : undefined}
                     className="text-gray-300 hover:text-[#833556] transition-colors duration-300 text-sm flex items-center group"
                   >
                     <ArrowRight size={14} className="mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />

@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   Heart,
   Users,
@@ -18,11 +18,22 @@ import {
   X,
   Phone,
   Mail,
+  Target,
+  ChevronDown,
+  MapPin,
+  Clock,
 } from "lucide-react";
+import { STRIPE_DONATION_LINK } from '@/config/constants';
+import { gsap } from "gsap";
 
 const WhatWeDoPage = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrollY, setScrollY] = useState(0);
+  const [isVisible, setIsVisible] = useState({});
+
+  // Refs for stats animation
+  const statsRef = useRef(null);
+  const statsAnimated = useRef(false);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -31,6 +42,132 @@ const WhatWeDoPage = () => {
       return () => window.removeEventListener("scroll", handleScroll);
     }
   }, []);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' && typeof document !== 'undefined') {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            setIsVisible((prev) => ({
+              ...prev,
+              [entry.target.id]: entry.isIntersecting,
+            }));
+            
+            // Handle stats animation
+            if (entry.target.id === 'hero-stats') {
+              if (entry.isIntersecting && !statsAnimated.current) {
+                // Stats section comes into view - start animation
+                console.log('WhatWeDo stats section in view - triggering animation');
+                setTimeout(() => animateStats(), 500);
+              } else if (!entry.isIntersecting && statsAnimated.current) {
+                // Stats section goes out of view - reset to zero
+                console.log('WhatWeDo stats section out of view - resetting to zero');
+                resetStats();
+              }
+            }
+          });
+        },
+        { threshold: 0.3, rootMargin: '50px' }
+      );
+
+      document.querySelectorAll('[id]').forEach((el) => {
+        observer.observe(el);
+      });
+
+      // Check if elements are already in view on page load
+      const checkInitialVisibility = () => {
+        document.querySelectorAll('[id]').forEach((el) => {
+          const rect = el.getBoundingClientRect();
+          const isInView = rect.top < window.innerHeight && rect.bottom > 0;
+          if (isInView) {
+            setIsVisible((prev) => ({
+              ...prev,
+              [el.id]: true,
+            }));
+          }
+        });
+      };
+
+      // Check immediately and after a short delay to ensure proper timing
+      checkInitialVisibility();
+      setTimeout(checkInitialVisibility, 200);
+
+      return () => observer.disconnect();
+    }
+  }, []);
+
+  const handleDonateClick = () => {
+    window.open(STRIPE_DONATION_LINK, '_blank');
+  };
+
+  // Function to reset stats to zero
+  const resetStats = () => {
+    if (!statsRef.current) return;
+    
+    // Kill any running GSAP animations
+    const statElements = statsRef.current.querySelectorAll('.stat-number');
+    gsap.killTweensOf(statElements);
+    
+    // Reset all stats to zero
+    statElements.forEach(element => {
+      element.textContent = '0';
+    });
+    
+    // Reset the animation flag to allow re-animation
+    statsAnimated.current = false;
+    console.log('WhatWeDo stats reset to zero - ready for re-animation');
+  };
+
+  // Function to animate stats counting up
+  const animateStats = () => {
+    if (!statsRef.current || statsAnimated.current) {
+      console.log('WhatWeDo animation already running or stats ref not available');
+      return;
+    }
+    
+    console.log('Starting WhatWeDo stats animation');
+    statsAnimated.current = true;
+    
+    const statElements = statsRef.current.querySelectorAll('.stat-number');
+    console.log(`Found ${statElements.length} stat elements`);
+    
+    statElements.forEach((element, index) => {
+      const finalValue = element.getAttribute('data-value');
+      const isPlus = finalValue.includes('+');
+      const numericValue = parseInt(finalValue.replace(/[+]/g, ''));
+      
+      console.log(`Animating WhatWeDo stat ${index + 1}: 0 → ${finalValue}`);
+      
+      // Clear the element and set initial value to 0
+      element.textContent = '0';
+      
+      // Create a counter object to track the current value
+      const counter = { value: 0 };
+      
+      // Animate counting up
+      gsap.to(counter, {
+        value: numericValue,
+        duration: 2.5,
+        delay: index * 0.3,
+        ease: "power2.out",
+        onUpdate: function() {
+          const currentValue = Math.floor(counter.value);
+          let displayValue = currentValue.toString();
+          
+          if (isPlus) {
+            displayValue += '+';
+          }
+          
+          element.textContent = displayValue;
+        },
+        onComplete: function() {
+          // Ensure final value is displayed correctly
+          element.textContent = finalValue;
+          console.log(`Completed WhatWeDo animation for stat ${index + 1}: ${finalValue}`);
+        }
+      });
+    });
+  };
 
   const navItems = [
     "Home",
@@ -118,21 +255,21 @@ const WhatWeDoPage = () => {
       title: "New Life for Children, in a New Land",
       description:
         "We have built shelter homes in different regions so children can move out of undeveloped areas to live, study and work in bigger and better cities.",
-      image: "/images/shelter-home.jpg",
+      image: "/images/faithfeedsmanykids.jpeg",
       stats: "500+ Children Relocated",
     },
     {
       title: "A New Future for Exploited Children",
       description:
         "Children and youngsters who are exploited in their early days need a helping hand and support for their mental health. We take them out of this zone to give them a better life.",
-      image: "/images/counseling-session.jpg",
+      image: "/images/faithfeedskidsstanding.jpeg",
       stats: "300+ Children Supported",
     },
     {
       title: "Bringing Dreams Within Reach for Children",
       description:
         "The underprivileged children do not have access to required financial help and resources needed to live the life of their dreams. We help them with everything they'll need.",
-      image: "/images/dreams-children.jpg",
+      image: "/images/faithfeedskidseating.jpeg",
       stats: "1000+ Dreams Fulfilled",
     },
   ];
@@ -185,11 +322,16 @@ const WhatWeDoPage = () => {
       </head>
 
       {/* Enhanced Hero Section */}
-      <section className="relative pt-16 lg:pt-20 min-h-[85vh] flex items-center">
+      <section 
+        id="hero-section"
+        className={`relative pt-16 lg:pt-20 min-h-[85vh] flex items-center ${
+          isVisible['hero-section'] ? 'animate-fadeInUp' : 'opacity-0'
+        }`}
+      >
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
           <img
-            src="/images/childrens-education.jpg"
+            src="/images/faithfeedskidsstanding.jpeg"
             alt="Children learning together at Faith Feeds International programs"
             className="w-full h-full object-cover"
           />
@@ -200,7 +342,12 @@ const WhatWeDoPage = () => {
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left Column - Main Content */}
-            <div className="max-w-2xl">
+            <div 
+              id="hero-content"
+              className={`max-w-2xl ${
+                isVisible['hero-content'] ? 'animate-slideInLeft' : 'opacity-0'
+              }`}
+            >
               {/* Page Identifier Badge */}
               <div className="inline-flex items-center px-4 py-2 rounded-full bg-[#833556]/90 text-white text-sm font-medium mb-4 backdrop-blur-sm">
                 <HandHeart size={16} className="mr-2" />
@@ -254,7 +401,13 @@ const WhatWeDoPage = () => {
             </div>
 
             {/* Right Column - Stats Cards */}
-            <div className="lg:flex lg:justify-end">
+            <div 
+              ref={statsRef}
+              id="hero-stats"
+              className={`lg:flex lg:justify-end ${
+                isVisible['hero-stats'] ? 'animate-slideInRight' : 'opacity-0'
+              }`}
+            >
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4 max-w-md">
                 {/* Impact Stats */}
                 <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 hover:bg-white/20 transition-all duration-300">
@@ -263,8 +416,11 @@ const WhatWeDoPage = () => {
                       <Users size={20} className="text-white" />
                     </div>
                     <div>
-                      <div className="text-2xl font-bold text-white">
-                        5,000+
+                      <div 
+                        className="stat-number text-2xl font-bold text-white"
+                        data-value="5,000+"
+                      >
+                        0
                       </div>
                       <div className="text-sm text-gray-300">
                         Children Supported
@@ -279,7 +435,12 @@ const WhatWeDoPage = () => {
                       <Building size={20} className="text-white" />
                     </div>
                     <div>
-                      <div className="text-2xl font-bold text-white">25+</div>
+                      <div 
+                        className="stat-number text-2xl font-bold text-white"
+                        data-value="25+"
+                      >
+                        0
+                      </div>
                       <div className="text-sm text-gray-300">Schools Built</div>
                     </div>
                   </div>
@@ -291,7 +452,12 @@ const WhatWeDoPage = () => {
                       <Globe size={20} className="text-white" />
                     </div>
                     <div>
-                      <div className="text-2xl font-bold text-white">12</div>
+                      <div 
+                        className="stat-number text-2xl font-bold text-white"
+                        data-value="12"
+                      >
+                        0
+                      </div>
                       <div className="text-sm text-gray-300">
                         Countries Reached
                       </div>
@@ -319,7 +485,12 @@ const WhatWeDoPage = () => {
       <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
-          <div className="text-center mb-16">
+          <div 
+            id="services-header"
+            className={`text-center mb-16 ${
+              isVisible['services-header'] ? 'animate-fadeInUp' : 'opacity-0'
+            }`}
+          >
             <div className="inline-flex items-center px-4 py-2 rounded-full bg-[#833556]/10 text-[#833556] text-sm font-medium mb-4">
               <HandHeart size={16} className="mr-2" />
               Our Core Services
@@ -335,7 +506,12 @@ const WhatWeDoPage = () => {
           </div>
 
           {/* Services Grid */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div 
+            id="services-grid"
+            className={`grid md:grid-cols-2 lg:grid-cols-3 gap-8 ${
+              isVisible['services-grid'] ? 'animate-fadeInScale' : 'opacity-0'
+            }`}
+          >
             {services.map((service, index) => {
               const Icon = service.icon;
               return (
@@ -377,7 +553,12 @@ const WhatWeDoPage = () => {
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
-          <div className="text-center mb-16">
+          <div 
+            id="care-areas-header"
+            className={`text-center mb-16 ${
+              isVisible['care-areas-header'] ? 'animate-fadeInUp' : 'opacity-0'
+            }`}
+          >
             <div className="inline-flex items-center px-4 py-2 rounded-full bg-[#833556]/10 text-[#833556] text-sm font-medium mb-4">
               <Star size={16} className="mr-2" />
               What We Care For
@@ -392,7 +573,12 @@ const WhatWeDoPage = () => {
           </div>
 
           {/* Care Areas */}
-          <div className="space-y-16">
+          <div 
+            id="care-areas-grid"
+            className={`space-y-16 ${
+              isVisible['care-areas-grid'] ? 'animate-fadeInScale' : 'opacity-0'
+            }`}
+          >
             {careAreas.map((area, index) => (
               <div
                 key={area.title}
@@ -443,7 +629,12 @@ const WhatWeDoPage = () => {
       </section>
 
       {/* Call to Action Section */}
-      <section className="py-20 bg-[#833556] relative overflow-hidden">
+      <section 
+        id="cta-section"
+        className={`py-20 bg-[#833556] relative overflow-hidden ${
+          isVisible['cta-section'] ? 'animate-fadeInUp' : 'opacity-0'
+        }`}
+      >
         {/* Background Pattern */}
         <div className="absolute inset-0 opacity-10">
           <div
@@ -489,7 +680,10 @@ const WhatWeDoPage = () => {
                 />
               </button>
 
-              <button className="group cursor-pointer relative px-8 py-4 bg-transparent border-2 border-white text-white font-semibold text-lg rounded-xl hover:bg-white hover:text-[#833556] transition-all duration-300 hover:scale-105 transform hover:-translate-y-1 flex items-center justify-center gap-2">
+              <button
+                onClick={handleDonateClick}
+                className="group cursor-pointer relative px-8 py-4 bg-transparent border-2 border-white text-white font-semibold text-lg rounded-xl hover:bg-white hover:text-[#833556] transition-all duration-300 hover:scale-105 transform hover:-translate-y-1 flex items-center justify-center gap-2"
+              >
                 <Heart size={20} />
                 Donate Now
                 <ArrowRight

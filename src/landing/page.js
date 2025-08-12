@@ -1,10 +1,20 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { ChevronDown, Heart, Globe, ArrowRight, HandHeart, Users, Target, Award, Play } from "lucide-react";
+import { STRIPE_DONATION_LINK } from "@/config/constants";
+import { gsap } from "gsap";
 
 const LandingPage = () => {
   const [scrollY, setScrollY] = useState(0);
-  const [isVisible, setIsVisible] = useState({});
+  const [isVisible, setIsVisible] = useState({
+    'hero-content': true,  // Set hero content to visible by default
+    'hero-image': true,    // Set hero image to visible by default
+    'stats': false         // Stats section starts hidden (below the fold)
+  });
+
+  // Refs for stats animation
+  const statsRef = useRef(null);
+  const statsAnimated = useRef(false);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -23,18 +33,134 @@ const LandingPage = () => {
               ...prev,
               [entry.target.id]: entry.isIntersecting,
             }));
+            
+            // Handle stats animation
+            if (entry.target.id === 'stats') {
+              if (entry.isIntersecting && !statsAnimated.current) {
+                // Stats section comes into view - start animation
+                console.log('Stats section in view - triggering animation');
+                setTimeout(() => animateStats(), 500);
+              } else if (!entry.isIntersecting && statsAnimated.current) {
+                // Stats section goes out of view - reset to zero
+                console.log('Stats section out of view - resetting to zero');
+                resetStats();
+              }
+            }
           });
         },
-        { threshold: 0.1, rootMargin: '50px' }
+        { threshold: 0.3, rootMargin: '50px' }
       );
 
+      // Observe all elements with IDs
       document.querySelectorAll('[id]').forEach((el) => {
         observer.observe(el);
       });
 
+      // Check if elements are already in view on page load
+      const checkInitialVisibility = () => {
+        document.querySelectorAll('[id]').forEach((el) => {
+          const rect = el.getBoundingClientRect();
+          const isInView = rect.top < window.innerHeight && rect.bottom > 0;
+          if (isInView) {
+            setIsVisible((prev) => ({
+              ...prev,
+              [el.id]: true,
+            }));
+            
+            // Trigger stats animation if stats section is already in view
+            if (el.id === 'stats' && isInView && !statsAnimated.current) {
+              console.log('Stats section already in view - triggering animation');
+              setTimeout(() => animateStats(), 500);
+            }
+          }
+        });
+      };
+
+      // Check immediately and after a short delay to ensure proper timing
+      checkInitialVisibility();
+      setTimeout(checkInitialVisibility, 200);
+      setTimeout(checkInitialVisibility, 500);
+
       return () => observer.disconnect();
     }
   }, []);
+
+  const handleDonateClick = () => {
+    window.open(STRIPE_DONATION_LINK, '_blank');
+  };
+
+  // Function to reset stats to zero
+  const resetStats = () => {
+    if (!statsRef.current) return;
+    
+    // Kill any running GSAP animations
+    const statElements = statsRef.current.querySelectorAll('.stat-number');
+    gsap.killTweensOf(statElements);
+    
+    // Reset all stats to zero
+    statElements.forEach(element => {
+      element.textContent = '0';
+    });
+    
+    // Reset the animation flag to allow re-animation
+    statsAnimated.current = false;
+    console.log('Stats reset to zero - ready for re-animation');
+  };
+
+  // Function to animate stats counting up
+  const animateStats = () => {
+    if (!statsRef.current || statsAnimated.current) {
+      console.log('Animation already running or stats ref not available');
+      return;
+    }
+    
+    console.log('Starting stats animation');
+    statsAnimated.current = true;
+    
+    const statElements = statsRef.current.querySelectorAll('.stat-number');
+    console.log(`Found ${statElements.length} stat elements`);
+    
+    statElements.forEach((element, index) => {
+      const finalValue = element.getAttribute('data-value');
+      const isK = finalValue.includes('K');
+      const isPlus = finalValue.includes('+');
+      const numericValue = parseInt(finalValue.replace(/[K+]/g, ''));
+      
+      console.log(`Animating stat ${index + 1}: 0 → ${finalValue}`);
+      
+      // Clear the element and set initial value to 0
+      element.textContent = '0';
+      
+      // Create a counter object to track the current value
+      const counter = { value: 0 };
+      
+      // Animate counting up
+      gsap.to(counter, {
+        value: numericValue,
+        duration: 2.5,
+        delay: index * 0.3, // Slightly longer stagger for better effect
+        ease: "power2.out",
+        onUpdate: function() {
+          const currentValue = Math.floor(counter.value);
+          let displayValue = currentValue.toString();
+          
+          if (isK && currentValue > 0) {
+            displayValue = currentValue + 'K';
+          }
+          if (isPlus) {
+            displayValue += '+';
+          }
+          
+          element.textContent = displayValue;
+        },
+        onComplete: function() {
+          // Ensure final value is displayed correctly
+          element.textContent = finalValue;
+          console.log(`Completed animation for stat ${index + 1}: ${finalValue}`);
+        }
+      });
+    });
+  };
 
   const stats = [
     { number: "50K+", label: "Lives Transformed", icon: Users },
@@ -142,6 +268,16 @@ const LandingPage = () => {
           -webkit-user-select: none;
         }
         
+        /* Text animation styles */
+        .text-animate-container {
+          overflow: hidden;
+        }
+        
+        .text-animate-char {
+          display: inline-block;
+          white-space: pre;
+        }
+        
         @media (max-width: 768px) {
           .mobile-hero-height {
             min-height: 100vh;
@@ -159,33 +295,42 @@ const LandingPage = () => {
             <div 
               id="hero-content"
               className={`space-y-6 lg:space-y-8 ${
-                isVisible['hero-content'] ? 'animate-slideInLeft' : 'opacity-0'
+                isVisible['hero-content'] ? 'animate-slideInLeft' : 'opacity-100'
               }`}
             >
               {/* Badge */}
-              <div className="inline-flex items-center px-4 py-2 rounded-full bg-[#833556]/10 text-[#833556] text-sm font-medium glass-effect">
+              <div 
+                className="inline-flex items-center px-4 py-2 rounded-full bg-[#833556]/10 text-[#833556] text-sm font-medium glass-effect text-animate-container"
+              >
                 <Globe size={16} className="mr-2" />
                 Making a Global Impact
               </div>
 
               {/* Main Heading */}
-              <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold text-gray-900 leading-tight">
-                Transforming Lives Through
-                <span className="text-[#833556] block mt-2 bg-gradient-to-r from-[#833556] to-[#a04066] bg-clip-text text-transparent">
-                  Faith & Community
-                </span>
+              <h1 
+                className="text-3xl sm:text-4xl lg:text-6xl font-bold text-gray-900 leading-tight text-animate-container"
+              >
+                Transforming Lives
+                <br />
+                Through
+                <br />
+                <span className="text-[#833556]">Faith & Community</span>
               </h1>
 
               {/* Subtitle */}
-              <p className="text-base sm:text-lg lg:text-xl text-gray-600 leading-relaxed max-w-xl">
+              <p 
+                className="text-base sm:text-lg lg:text-xl text-gray-600 leading-relaxed max-w-xl text-animate-container"
+              >
                 Join us in our mission to connect people with opportunities for
                 transformation through faith, community support, and sustainable
                 initiatives that create lasting change.
               </p>
 
               {/* Action Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                <button className="group relative px-6 py-4 lg:px-8 lg:py-4 bg-[#833556] text-white font-semibold text-base lg:text-lg rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-105 transform hover:-translate-y-2 flex items-center justify-center gap-2 mobile-optimized overflow-hidden">
+              <div 
+                className="flex flex-col sm:flex-row gap-4 pt-4"
+              >
+                <button className="group relative px-6 py-4 lg:px-8 lg:py-4 bg-[#833556] text-white font-semibold text-base lg:text-lg rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-105 transform hover:-translate-y-2 flex items-center justify-center gap-2 mobile-optimized overflow-hidden" onClick={handleDonateClick}>
                   <div className="absolute inset-0 bg-gradient-to-r from-[#833556] via-[#a04066] to-[#833556] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-600" />
                   <div className="relative z-10 flex items-center justify-center gap-2">
@@ -207,7 +352,9 @@ const LandingPage = () => {
               </div>
 
               {/* Trust Indicators */}
-              <div className="flex items-center space-x-6 pt-6 lg:pt-8">
+              <div 
+                className="flex items-center space-x-6 pt-6 lg:pt-8"
+              >
                 <div className="flex items-center space-x-2">
                   <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse" />
                   <span className="text-sm text-gray-600">Verified Impact</span>
@@ -223,7 +370,7 @@ const LandingPage = () => {
             <div 
               id="hero-image"
               className={`relative ${
-                isVisible['hero-image'] ? 'animate-slideInRight' : 'opacity-0'
+                isVisible['hero-image'] ? 'animate-slideInRight' : 'opacity-100'
               }`}
               style={{
                 transform: `translateY(${scrollY * -0.1}px)`,
@@ -231,7 +378,7 @@ const LandingPage = () => {
             >
               <div className="relative overflow-hidden rounded-3xl shadow-2xl group">
                 <img
-                  src="/images/happy-young-group.webp"
+                  src="/images/faithfeedskidseating.jpeg"
                   alt="Faith Feeds International Community"
                   className="w-full h-[400px] sm:h-[500px] lg:h-[600px] object-cover transition-transform duration-400 group-hover:scale-110"
                 />
@@ -306,6 +453,7 @@ const LandingPage = () => {
         <div className="absolute inset-0 bg-black/10" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div 
+            ref={statsRef}
             id="stats"
             className={`grid grid-cols-2 lg:grid-cols-4 gap-8 ${
               isVisible['stats'] ? 'animate-slideInUp' : 'opacity-0'
@@ -322,7 +470,12 @@ const LandingPage = () => {
                   <div className="inline-flex items-center justify-center w-12 h-12 lg:w-16 lg:h-16 bg-white/20 rounded-2xl mb-4 group-hover:bg-white/30 transition-colors duration-300">
                     <IconComponent size={24} className="text-white" />
                   </div>
-                  <div className="text-2xl lg:text-4xl font-bold text-white mb-2">{stat.number}</div>
+                  <div 
+                    className="stat-number text-2xl lg:text-4xl font-bold text-white mb-2"
+                    data-value={stat.number}
+                  >
+                    0
+                  </div>
                   <div className="text-white/80 font-medium">{stat.label}</div>
                 </div>
               );

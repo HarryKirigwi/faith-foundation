@@ -1,6 +1,7 @@
 'use client'
 import React, { useState, useEffect } from 'react';
 import { Heart, Target, Users, Lightbulb, Globe, ArrowRight, Menu, X, Shield, BookOpen, HandHeart, ChevronDown, Play, Star, Phone, Clock, MapPin } from 'lucide-react';
+import { STRIPE_DONATION_LINK } from '@/config/constants';
 
 export default function AboutPage() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -33,9 +34,31 @@ export default function AboutPage() {
         observer.observe(el);
       });
 
+      // Check if elements are already in view on page load
+      const checkInitialVisibility = () => {
+        document.querySelectorAll('[id]').forEach((el) => {
+          const rect = el.getBoundingClientRect();
+          const isInView = rect.top < window.innerHeight && rect.bottom > 0;
+          if (isInView) {
+            setIsVisible((prev) => ({
+              ...prev,
+              [el.id]: true,
+            }));
+          }
+        });
+      };
+
+      // Check immediately and after a short delay to ensure proper timing
+      checkInitialVisibility();
+      setTimeout(checkInitialVisibility, 200);
+
       return () => observer.disconnect();
     }
   }, []);
+
+  const handleDonateClick = () => {
+    window.open(STRIPE_DONATION_LINK, '_blank');
+  };
 
   const navItems = [
     'Home',
@@ -72,17 +95,17 @@ export default function AboutPage() {
     {
       title: "Breakfast Before School",
       description: "The program ensured that children living in adverse conditions could still afford to have a meal before going to school.",
-      image: "/images/breakfast-before-school.jpg"
+      image: "/images/faithfeedskidseating.jpeg"
     },
     {
       title: "Empowering Families",
       description: "Building sustainable programs that strengthen families and promote self-reliance.",
-      image: "/images/empowering-families.jpg"
+      image: "/images/faithfeedsmanykids.jpeg"
     },
     {
       title: "Children's Education",
       description: "Giving children the tools to succeed through education and mentorship.",
-      image: "/images/childrens-education.jpg"
+      image: "/images/faithfeedskidsstanding.jpeg"
     }
   ];
 
@@ -114,17 +137,12 @@ export default function AboutPage() {
 
       {/* Hero Section with Background Image */}
       <main className="relative mobile-hero-height">
-        {/* Background Image with Parallax */}
-        <div 
-          className="absolute inset-0 z-0"
-          style={{
-            transform: `translateY(${scrollY * 0.5}px)`,
-          }}
-        >
+        {/* Background Image - Solid (No Parallax) */}
+        <div className="absolute inset-0 z-0">
           <img
             src="/images/aboutbackground.jpg"
             alt="Faith Feeds International community background"
-            className="w-full h-full object-cover scale-110"
+            className="w-full h-full object-cover"
           />
           {/* Enhanced Gradient Overlay */}
           <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/40"></div>
@@ -376,8 +394,20 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Parallax Background Section - Bridging Founder to Mission */}
+      {/* From Vision to Action Section - Bridging Founder to Mission */}
       <section className="relative overflow-hidden" style={{ height: '60vh', minHeight: '400px' }}>
+        {/* Background Image */}
+        <div className="absolute inset-0 z-0">
+          <img
+            src="/images/aboutbackground.jpg"
+            alt="Faith Feeds International vision to action background"
+            className="w-full h-full object-cover"
+          />
+          {/* Gradient Overlay for better text readability */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#833556]/80 via-[#833556]/60 to-[#833556]/40"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-[#833556]/50 via-transparent to-[#833556]/60"></div>
+        </div>
+        
         {/* Content with Full-Width Backdrop Filter */}
         <div className="relative h-full flex items-center justify-center backdrop-blur-[10px] bg-white/10" style={{ zIndex: 10 }}>
           <div className="text-center text-white max-w-4xl mx-auto px-4">
@@ -499,17 +529,27 @@ export default function AboutPage() {
                 }`}
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-[#833556]/5 to-transparent group-hover:from-[#833556]/10 transition-colors duration-300"></div>
-                <div className="relative p-6 lg:p-8 bg-white mobile-card-spacing">
+                {/* Background Image - Mobile Only */}
+                <div className="absolute inset-0 z-0 md:hidden">
+                  <img
+                    src="/images/aboutbackground.jpg"
+                    alt={`${item.title} background`}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-br from-[#833556]/80 via-[#833556]/60 to-[#833556]/40"></div>
+                </div>
+                
+                {/* Content with Backdrop Filter - Mobile Only */}
+                <div className="relative z-10 p-6 lg:p-8 md:backdrop-blur-none md:bg-white mobile-card-spacing backdrop-blur-[10px] bg-white/20">
                   <div className="flex items-center mb-6">
                     <div className="w-14 h-14 lg:w-16 lg:h-16 bg-gradient-to-br from-[#833556] to-[#a04066] text-white rounded-2xl flex items-center justify-center font-bold text-xl lg:text-2xl mr-4 group-hover:scale-110 transition-transform duration-300">
                       {item.number}
                     </div>
-                    <h3 className="text-xl lg:text-2xl font-bold text-gray-900">{item.title}</h3>
-                  </div>
-                  <p className="text-gray-600 text-base lg:text-lg leading-relaxed">
-                    {item.description}
-                  </p>
+                                      <h3 className="text-xl lg:text-2xl font-bold text-white md:text-gray-900">{item.title}</h3>
+                </div>
+                <p className="text-white/90 md:text-gray-600 text-base lg:text-lg leading-relaxed">
+                  {item.description}
+                </p>
                 </div>
                 <div className="absolute inset-0 border-2 border-[#833556]/20 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </div>
@@ -637,24 +677,34 @@ export default function AboutPage() {
                 }`}
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-[#833556]/5 to-transparent group-hover:from-[#833556]/10 transition-colors duration-300"></div>
-                <div className="relative p-6 lg:p-8 bg-white mobile-card-spacing">
+                {/* Background Image - Mobile Only */}
+                <div className="absolute inset-0 z-0 md:hidden">
+                  <img
+                    src="/images/aboutbackground.jpg"
+                    alt={`${testimonial.name} testimonial background`}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-br from-[#833556]/80 via-[#833556]/60 to-[#833556]/40"></div>
+                </div>
+                
+                {/* Content with Backdrop Filter - Mobile Only */}
+                <div className="relative z-10 p-6 lg:p-8 md:backdrop-blur-none md:bg-white mobile-card-spacing backdrop-blur-[10px] bg-white/20">
                   <div className="flex items-center mb-6">
                     <div className="w-16 h-16 lg:w-20 lg:h-20 bg-gradient-to-br from-[#833556]/20 to-[#833556]/10 rounded-full flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300">
                       <span className="text-[#833556] font-bold text-xl lg:text-2xl">{testimonial.initial}</span>
                     </div>
                     <div>
-                      <h3 className="text-lg lg:text-xl font-bold text-gray-900">{testimonial.name}</h3>
-                      <p className="text-sm lg:text-base text-gray-600">{testimonial.role}</p>
+                      <h3 className="text-lg lg:text-xl font-bold text-white md:text-gray-900">{testimonial.name}</h3>
+                      <p className="text-sm lg:text-base text-white/80 md:text-gray-600">{testimonial.role}</p>
                     </div>
                   </div>
                   <div className="mb-6">
-                    <div className="flex text-[#833556] mb-4 text-lg">
+                    <div className="flex text-[#ffd700] md:text-[#833556] mb-4 text-lg">
                       {Array.from({length: 5}, (_, i) => (
                         <Star key={i} size={20} className="fill-current" />
                       ))}
                     </div>
-                    <p className="text-gray-600 text-base lg:text-lg leading-relaxed italic">
+                    <p className="text-white/90 md:text-gray-600 text-base lg:text-lg leading-relaxed italic">
                       "{testimonial.content}"
                     </p>
                   </div>
@@ -813,15 +863,25 @@ export default function AboutPage() {
                 <div className="space-y-6">
                   {/* Physical Address */}
                   <div className="group relative overflow-hidden rounded-3xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 transform hover:-translate-y-1 mobile-optimized">
-                    <div className="absolute inset-0 bg-gradient-to-br from-[#833556]/5 to-transparent group-hover:from-[#833556]/10 transition-colors duration-300"></div>
-                    <div className="relative p-6 lg:p-8 bg-white">
+                    {/* Background Image - Mobile Only */}
+                    <div className="absolute inset-0 z-0 md:hidden">
+                      <img
+                        src="/images/aboutbackground.jpg"
+                        alt="Physical address background"
+                        className="w-full h-full object-cover"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-br from-[#833556]/80 via-[#833556]/60 to-[#833556]/40"></div>
+                    </div>
+                    
+                    {/* Content with Backdrop Filter - Mobile Only */}
+                    <div className="relative z-10 p-6 lg:p-8 md:backdrop-blur-none md:bg-white backdrop-blur-[10px] bg-white/20">
                       <div className="flex items-center mb-4">
                         <div className="w-14 h-14 lg:w-16 lg:h-16 bg-gradient-to-br from-[#833556] to-[#a04066] rounded-2xl flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300">
                           <MapPin className="w-7 h-7 lg:w-8 lg:h-8 text-white" />
                         </div>
-                        <h4 className="text-lg lg:text-xl font-bold text-gray-900">Physical Address</h4>
+                        <h4 className="text-lg lg:text-xl font-bold text-white md:text-gray-900">Physical Address</h4>
                       </div>
-                      <p className="text-gray-600 text-base lg:text-lg leading-relaxed">
+                      <p className="text-white/90 md:text-gray-600 text-base lg:text-lg leading-relaxed">
                         3528 SE 94 street Okc
                       </p>
                     </div>
@@ -829,15 +889,25 @@ export default function AboutPage() {
                   
                   {/* Work Hours */}
                   <div className="group relative overflow-hidden rounded-3xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 transform hover:-translate-y-1 mobile-optimized">
-                    <div className="absolute inset-0 bg-gradient-to-br from-[#833556]/5 to-transparent group-hover:from-[#833556]/10 transition-colors duration-300"></div>
-                    <div className="relative p-6 lg:p-8 bg-white">
+                    {/* Background Image - Mobile Only */}
+                    <div className="absolute inset-0 z-0 md:hidden">
+                      <img
+                        src="/images/aboutbackground.jpg"
+                        alt="Work hours background"
+                        className="w-full h-full object-cover"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-br from-[#833556]/80 via-[#833556]/60 to-[#833556]/40"></div>
+                    </div>
+                    
+                    {/* Content with Backdrop Filter - Mobile Only */}
+                    <div className="relative z-10 p-6 lg:p-8 md:backdrop-blur-none md:bg-white backdrop-blur-[10px] bg-white/20">
                       <div className="flex items-center mb-4">
                         <div className="w-14 h-14 lg:w-16 lg:h-16 bg-gradient-to-br from-[#833556] to-[#a04066] rounded-2xl flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300">
                           <Clock className="w-7 h-7 lg:w-8 lg:h-8 text-white" />
                         </div>
-                        <h4 className="text-lg lg:text-xl font-bold text-gray-900">Work Hours</h4>
+                        <h4 className="text-lg lg:text-xl font-bold text-white md:text-gray-900">Work Hours</h4>
                       </div>
-                      <div className="space-y-2 text-gray-600">
+                      <div className="space-y-2 text-white/90 md:text-gray-600">
                         <p className="text-base lg:text-lg">Monday to Friday: 7am - 7pm</p>
                         <p className="text-base lg:text-lg">Weekend: 10am - 5pm</p>
                       </div>
@@ -846,17 +916,27 @@ export default function AboutPage() {
                   
                   {/* Call Or WhatsApp */}
                   <div className="group relative overflow-hidden rounded-3xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 transform hover:-translate-y-1 mobile-optimized">
-                    <div className="absolute inset-0 bg-gradient-to-br from-[#833556]/5 to-transparent group-hover:from-[#833556]/10 transition-colors duration-300"></div>
-                    <div className="relative p-6 lg:p-8 bg-white">
+                    {/* Background Image - Mobile Only */}
+                    <div className="absolute inset-0 z-0 md:hidden">
+                      <img
+                        src="/images/aboutbackground.jpg"
+                        alt="Contact phone background"
+                        className="w-full h-full object-cover"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-br from-[#833556]/80 via-[#833556]/60 to-[#833556]/40"></div>
+                    </div>
+                    
+                    {/* Content with Backdrop Filter - Mobile Only */}
+                    <div className="relative z-10 p-6 lg:p-8 md:backdrop-blur-none md:bg-white backdrop-blur-[10px] bg-white/20">
                       <div className="flex items-center mb-4">
                         <div className="w-14 h-14 lg:w-16 lg:h-16 bg-gradient-to-br from-[#833556] to-[#a04066] rounded-2xl flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300">
                           <Phone className="w-7 h-7 lg:w-8 lg:h-8 text-white" />
                         </div>
-                        <h4 className="text-lg lg:text-xl font-bold text-gray-900">Call Or WhatsApp</h4>
+                        <h4 className="text-lg lg:text-xl font-bold text-white md:text-gray-900">Call Or WhatsApp</h4>
                       </div>
                       <a 
                         href="tel:+14055351599"
-                        className="text-[#833556] text-base lg:text-lg font-semibold hover:text-[#a04066] transition-colors duration-300"
+                        className="text-[#ffd700] md:text-[#833556] text-base lg:text-lg font-semibold hover:text-white md:hover:text-[#a04066] transition-colors duration-300"
                       >
                         +1 (405) 535-1599
                       </a>
@@ -925,7 +1005,10 @@ export default function AboutPage() {
               <ArrowRight size={24} className="relative z-10 group-hover:translate-x-1 transition-transform duration-300" />
             </button>
             
-            <button className="group relative px-8 py-4 lg:px-10 lg:py-5 bg-transparent border-2 border-white text-white font-bold text-lg lg:text-xl rounded-2xl hover:bg-white hover:text-[#833556] transition-all duration-300 hover:scale-105 transform hover:-translate-y-2 flex items-center justify-center gap-3 mobile-optimized">
+            <button 
+              onClick={handleDonateClick}
+              className="group relative px-8 py-4 lg:px-10 lg:py-5 bg-transparent border-2 border-white text-white font-bold text-lg lg:text-xl rounded-2xl hover:bg-white hover:text-[#833556] transition-all duration-300 hover:scale-105 transform hover:-translate-y-2 flex items-center justify-center gap-3 mobile-optimized"
+            >
               <Heart size={24} className="group-hover:animate-pulse" />
               <span>Donate Now</span>
             </button>
