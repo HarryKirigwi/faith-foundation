@@ -56,19 +56,19 @@ const Navigation = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
-          <div className="flex items-center space-x-3 group">
+          <div className="flex items-center space-x-2 sm:space-x-3 group">
             <div className="relative">
               <img 
                 src="http://faithcp.rf.gd/wp-content/uploads/2025/06/FFI-LOGO.png" 
                 alt="Faith Feeds International Logo" 
-                className="h-8 sm:h-10 w-auto transform group-hover:scale-105 transition-transform duration-300"
+                className="h-6 sm:h-8 md:h-10 w-auto transform group-hover:scale-105 transition-transform duration-300"
               />
             </div>
             <div className="hidden sm:block">
               <span className="text-gray-900 font-bold text-lg xl:text-xl">Faith Feeds International</span>
               <div className="text-xs text-gray-600 -mt-1">Transforming Lives</div>
             </div>
-            <span className="sm:hidden text-gray-900 font-bold text-lg">FFI</span>
+            <span className="sm:hidden text-gray-900 font-bold text-sm">FFI</span>
           </div>
 
           {/* Desktop Navigation */}

@@ -324,7 +324,7 @@ const WhatWeDoPage = () => {
       {/* Enhanced Hero Section */}
       <section 
         id="hero-section"
-        className={`relative pt-16 lg:pt-20 min-h-[85vh] flex items-center ${
+        className={`relative pt-12 sm:pt-16 lg:pt-20 min-h-screen flex items-center ${
           isVisible['hero-section'] ? 'animate-fadeInUp' : 'opacity-0'
         }`}
       >
@@ -340,22 +340,22 @@ const WhatWeDoPage = () => {
 
         {/* Content */}
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="flex flex-col lg:grid lg:grid-cols-2 gap-8 sm:gap-12 items-center">
             {/* Left Column - Main Content */}
             <div 
               id="hero-content"
-              className={`max-w-2xl ${
+              className={`max-w-2xl text-center lg:text-left ${
                 isVisible['hero-content'] ? 'animate-slideInLeft' : 'opacity-0'
               }`}
             >
               {/* Page Identifier Badge */}
-              <div className="inline-flex items-center px-4 py-2 rounded-full bg-[#833556]/90 text-white text-sm font-medium mb-4 backdrop-blur-sm">
-                <HandHeart size={16} className="mr-2" />
-                What We Do
+              <div className="inline-flex items-center px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-[#833556]/90 text-white text-xs sm:text-sm font-medium mb-3 sm:mb-4 backdrop-blur-sm">
+                <HandHeart size={14} className="mr-1.5 sm:mr-2 sm:w-4 sm:h-4" />
+                <span className="text-xs sm:text-sm">What We Do</span>
               </div>
 
               {/* Breadcrumb */}
-              <nav className="flex items-center space-x-2 text-sm text-gray-300 mb-6">
+              <nav className="flex items-center justify-center lg:justify-start space-x-2 text-xs sm:text-sm text-gray-300 mb-4 sm:mb-6">
                 <a href="#home" className="hover:text-white transition-colors">
                   Home
                 </a>
@@ -364,15 +364,15 @@ const WhatWeDoPage = () => {
               </nav>
 
               {/* Main Heading */}
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
+              <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-4 sm:mb-6 px-2">
                 Supporting Children &
-                <span className="text-[#833556] block mt-2">
+                <span className="text-[#833556] block mt-1 sm:mt-2">
                   Youth to Thrive
                 </span>
               </h1>
 
               {/* Subtitle */}
-              <p className="text-xl text-gray-200 leading-relaxed mb-8">
+              <p className="text-sm sm:text-lg md:text-xl text-gray-200 leading-relaxed mb-6 sm:mb-8 px-4">
                 Through comprehensive programs including shelter homes, schools,
                 healthcare, and empowerment initiatives, we create lasting
                 change in the lives of underprivileged children and youth
@@ -380,21 +380,21 @@ const WhatWeDoPage = () => {
               </p>
 
               {/* CTA Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4 mb-8">
-                <button className="group relative px-8 py-4 bg-[#833556] text-white font-semibold text-lg rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 transform hover:-translate-y-1 flex items-center justify-center gap-2 cursor-pointer">
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-6 sm:mb-8 px-4">
+                <button className="group relative px-6 py-3 sm:px-8 sm:py-4 bg-[#833556] text-white font-semibold text-sm sm:text-lg rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 transform hover:-translate-y-1 flex items-center justify-center gap-2 cursor-pointer min-h-[44px] sm:min-h-[48px]">
                   <div className="relative z-10 flex items-center justify-center gap-2">
-                    <Users size={20} />
-                    Become a Volunteer
+                    <Users size={18} className="sm:w-5 sm:h-5" />
+                    <span className="text-sm sm:text-base">Become a Volunteer</span>
                   </div>
                   <div className="absolute inset-0 bg-gradient-to-r from-[#833556] to-[#a04066] rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </button>
 
-                <button className="group cursor-pointer relative px-8 py-4 bg-white text-[#833556] font-semibold text-lg rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 transform hover:-translate-y-1 flex items-center justify-center gap-2">
-                  <Heart size={20} />
-                  Donate Now
+                <button className="group cursor-pointer relative px-6 py-3 sm:px-8 sm:py-4 bg-white text-[#833556] font-semibold text-sm sm:text-lg rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 transform hover:-translate-y-1 flex items-center justify-center gap-2 min-h-[44px] sm:min-h-[48px]">
+                  <Heart size={18} className="sm:w-5 sm:h-5" />
+                  <span className="text-sm sm:text-base">Donate Now</span>
                   <ArrowRight
-                    size={20}
-                    className="group-hover:translate-x-1 transition-transform duration-300"
+                    size={18}
+                    className="group-hover:translate-x-1 transition-transform duration-300 sm:w-5 sm:h-5"
                   />
                 </button>
               </div>

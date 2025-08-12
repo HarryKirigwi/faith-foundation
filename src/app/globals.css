@@ -27,6 +27,53 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Mobile-first optimizations */
+@media (max-width: 768px) {
+  /* Ensure proper touch targets */
+  button, a, [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Optimize text for mobile reading */
+  p, span, div {
+    line-height: 1.6;
+  }
+  
+  /* Improve mobile scrolling */
+  * {
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* Optimize images for mobile */
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  /* Mobile-specific spacing */
+  .mobile-card-spacing {
+    margin: 0.5rem;
+    padding: 1rem;
+  }
+  
+  /* Mobile-optimized buttons */
+  .mobile-optimized {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+  }
+  
+  /* Mobile hero height */
+  .mobile-hero-height {
+    min-height: 100vh;
+    min-height: 100svh;
+  }
 }
 
 /* Animation keyframes */
