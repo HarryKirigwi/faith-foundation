@@ -277,54 +277,57 @@ export default function VolunteerPage() {
 
       {/* Volunteer Stats Section */}
       <section className="py-16 lg:py-20 bg-white relative overflow-hidden">
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div 
-            id="stats-header"
-            className={`text-center mb-12 lg:mb-16 ${
-              isVisible['stats-header'] ? 'animate-fadeInUp' : 'opacity-0'
-            }`}
-          >
-            <div className="inline-flex items-center px-4 py-2 rounded-full bg-[#833556]/10 text-[#833556] text-sm font-medium mb-6 glass-effect">
-              <Users size={16} className="mr-2" />
-              Volunteer Impact
+        {/* Content with Backdrop Filter - Mobile Only */}
+        <div className="relative z-10 md:backdrop-blur-none md:bg-transparent backdrop-blur-[10px] bg-white/20">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div 
+              id="stats-header"
+              className={`text-center mb-12 lg:mb-16 ${
+                isVisible['stats-header'] ? 'animate-fadeInUp' : 'opacity-0'
+              }`}
+            >
+              <div className="inline-flex items-center px-4 py-2 rounded-full bg-[#833556]/10 text-[#833556] text-sm font-medium mb-6 glass-effect">
+                <Users size={16} className="mr-2" />
+                Volunteer Impact
+              </div>
+              <h2 className="text-3xl sm:text-4xl lg:text-6xl font-bold text-white md:text-gray-900 leading-tight mb-6">
+                Our Amazing
+                <span className="text-[#833556] block mt-2 bg-gradient-to-r from-[#833556] to-[#a04066] bg-clip-text text-transparent">
+                  Volunteers
+                </span>
+              </h2>
             </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-6xl font-bold text-gray-900 leading-tight mb-6">
-              Our Amazing
-              <span className="text-[#833556] block mt-2 bg-gradient-to-r from-[#833556] to-[#a04066] bg-clip-text text-transparent">
-                Volunteers
-              </span>
-            </h2>
-          </div>
 
-          <div 
-            ref={statsRef}
-            id="stats-grid"
-            className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8"
-          >
-            {volunteerStats.map((stat, index) => {
-              const Icon = stat.icon;
-              return (
-                <div
-                  key={stat.label}
-                  id={`stat-${index}`}
-                  className={`text-center group ${
-                    isVisible[`stat-${index}`] ? 'animate-fadeInScale' : 'opacity-0'
-                  }`}
-                  style={{ animationDelay: `${index * 0.1}s` }}
-                >
-                  <div className="inline-flex items-center justify-center w-12 h-12 lg:w-16 lg:h-16 bg-[#833556]/10 rounded-2xl mb-4 group-hover:bg-[#833556]/20 transition-colors duration-300">
-                    <Icon size={24} className="text-[#833556]" />
-                  </div>
-                  <div 
-                    className="stat-number text-2xl lg:text-4xl font-bold text-gray-900 mb-2"
-                    data-value={stat.number}
+            <div 
+              ref={statsRef}
+              id="stats-grid"
+              className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8"
+            >
+              {volunteerStats.map((stat, index) => {
+                const Icon = stat.icon;
+                return (
+                  <div
+                    key={stat.label}
+                    id={`stat-${index}`}
+                    className={`text-center group ${
+                      isVisible[`stat-${index}`] ? 'animate-fadeInScale' : 'opacity-0'
+                    }`}
+                    style={{ animationDelay: `${index * 0.1}s` }}
                   >
-                    0
+                    <div className="inline-flex items-center justify-center w-12 h-12 lg:w-16 lg:h-16 bg-[#833556]/10 rounded-2xl mb-4 group-hover:bg-[#833556]/20 transition-colors duration-300">
+                      <Icon size={24} className="text-[#833556]" />
+                    </div>
+                    <div 
+                      className="stat-number text-2xl lg:text-4xl font-bold text-white md:text-gray-900 mb-2"
+                      data-value={stat.number}
+                    >
+                      0
+                    </div>
+                    <div className="text-white/90 md:text-gray-600 font-medium">{stat.label}</div>
                   </div>
-                  <div className="text-gray-600 font-medium">{stat.label}</div>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
           </div>
         </div>
       </section>
