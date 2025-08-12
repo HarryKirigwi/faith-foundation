@@ -2,8 +2,10 @@
 import React, { useState, useEffect } from "react";
 import { Heart, Target, Users, Lightbulb, Globe, ArrowRight, ChevronDown, Star, Shield, BookOpen, HandHeart, Play, Award, Clock, MapPin, Phone, Mail } from "lucide-react";
 import { STRIPE_DONATION_LINK } from "@/config/constants";
+import { useRouter } from 'next/navigation';
 
 const ServicesSection = () => {
+  const router = useRouter();
   const [scrollY, setScrollY] = useState(0);
   const [isVisible, setIsVisible] = useState({});
 
@@ -404,7 +406,10 @@ const ServicesSection = () => {
                     <ArrowRight size={20} className="relative z-10 group-hover:translate-x-1 transition-transform duration-200" />
                   </button>
                   
-                  <button className="group px-8 py-4 bg-transparent border-2 border-white/30 text-white font-bold text-lg rounded-2xl hover:border-white hover:bg-white/10 transition-all duration-300 transform hover:scale-105 mobile-optimized">
+                  <button 
+                    onClick={() => router.push('/pages/blog')}
+                    className="group px-8 py-4 bg-transparent border-2 border-white/30 text-white font-bold text-lg rounded-2xl hover:border-white hover:bg-white/10 transition-all duration-300 transform hover:scale-105 mobile-optimized"
+                  >
                     Learn More
                   </button>
                 </div>

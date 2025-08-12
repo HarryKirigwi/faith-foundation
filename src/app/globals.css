@@ -31,50 +31,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Mobile-first optimizations */
-@media (max-width: 768px) {
-  /* Ensure proper touch targets */
-  button, a, [role="button"] {
-    min-height: 44px;
-    min-width: 44px;
-  }
-  
-  /* Optimize text for mobile reading */
-  p, span, div {
-    line-height: 1.6;
-  }
-  
-  /* Improve mobile scrolling */
-  * {
-    -webkit-overflow-scrolling: touch;
-  }
-  
-  /* Optimize images for mobile */
-  img {
-    max-width: 100%;
-    height: auto;
-  }
-  
-  /* Mobile-specific spacing */
-  .mobile-card-spacing {
-    margin: 0.5rem;
-    padding: 1rem;
-  }
-  
-  /* Mobile-optimized buttons */
-  .mobile-optimized {
-    -webkit-tap-highlight-color: transparent;
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
-  }
-  
-  /* Mobile hero height */
-  .mobile-hero-height {
-    min-height: 100vh;
-    min-height: 100svh;
-  }
-}
+
 
 /* Animation keyframes */
 @keyframes fadeInUp {
@@ -207,6 +164,11 @@ body {
   .mobile-hero-height {
     min-height: 100vh;
     min-height: 100svh;
+  }
+  
+  .mobile-hero-half-height {
+    min-height: 50vh;
+    min-height: 50svh;
   }
   
   .mobile-card-spacing {

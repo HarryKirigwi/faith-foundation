@@ -268,7 +268,7 @@ export default function BlogPage() {
     <div className="relative min-h-screen bg-white overflow-x-hidden">
 
       {/* Hero Section */}
-      <main className="relative min-h-screen flex items-center justify-center">
+      <main className="relative mobile-hero-half-height">
         <div 
           className="absolute inset-0 z-0"
           style={{
@@ -285,34 +285,34 @@ export default function BlogPage() {
           <div className="absolute inset-0 bg-[#833556]/20"></div>
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div 
             id="hero-content"
-            className={`text-center py-12 sm:py-16 lg:py-24 ${
+            className={`text-center py-16 lg:py-24 ${
               isVisible['hero-content'] ? 'animate-fadeInUp' : 'opacity-0'
             }`}
           >
-            <div className="inline-flex items-center px-4 py-2 sm:px-6 sm:py-3 rounded-full bg-white/20 backdrop-blur-lg text-white text-xs sm:text-sm font-medium mb-6 sm:mb-8 border border-white/30 glass-effect">
-              <BookOpen size={14} className="mr-1.5 sm:mr-2 sm:w-4 sm:h-4" />
-              <span className="text-xs sm:text-sm">Our Blog</span>
+            <div className="inline-flex items-center px-6 py-3 rounded-full bg-white/20 backdrop-blur-lg text-[#833556] text-sm font-medium mb-8 border border-white/30 glass-effect drop-shadow-lg">
+              <BookOpen size={16} className="mr-2" />
+              Our Blog
             </div>
 
-            <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-white leading-tight mb-4 sm:mb-6 drop-shadow-2xl px-2">
+            <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold text-white leading-tight mb-6 drop-shadow-2xl">
               Stories of
-              <span className="text-[#ffd700] block mt-1 sm:mt-2 drop-shadow-2xl bg-gradient-to-r from-[#ffd700] to-[#ffed4a] bg-clip-text text-transparent">
+              <span className="text-[#ffd700] block mt-2 drop-shadow-2xl bg-gradient-to-r from-[#ffd700] to-[#ffed4a] bg-clip-text text-transparent">
                 Hope & Impact
               </span>
             </h1>
 
-            <p className="text-sm sm:text-lg md:text-xl lg:text-2xl text-white/95 leading-relaxed max-w-4xl mx-auto drop-shadow-lg mb-6 sm:mb-8 px-4">
+            <p className="text-lg sm:text-xl lg:text-2xl text-white/95 leading-relaxed max-w-4xl mx-auto drop-shadow-lg mb-8">
               Discover inspiring stories, community updates, and insights from our mission to transform lives through faith and action.
             </p>
 
-            <div className="mt-6 sm:mt-8 px-4">
-              <button className="group relative px-6 py-3 sm:px-8 sm:py-4 lg:px-10 lg:py-5 bg-[#833556] text-white font-bold text-base sm:text-lg lg:text-xl rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-105 transform hover:-translate-y-2 flex items-center justify-center gap-2 sm:gap-3 mx-auto mobile-optimized overflow-hidden min-h-[48px] sm:min-h-[56px]">
-                <Heart size={20} className="relative z-10 group-hover:animate-pulse sm:w-6 sm:h-6" />
-                <span className="relative z-10 text-sm sm:text-base">Subscribe to Our Blog</span>
-                <ArrowRight size={20} className="relative z-10 group-hover:translate-x-1 transition-transform duration-300 sm:w-6 sm:h-6" />
+            <div className="mt-8">
+              <button className="group relative px-8 py-4 lg:px-10 lg:py-5 bg-[#833556] text-white font-bold text-lg lg:text-xl rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-105 transform hover:-translate-y-2 flex items-center justify-center gap-3 mx-auto mobile-optimized overflow-hidden">
+                <Heart size={24} className="relative z-10 group-hover:animate-pulse" />
+                <span className="relative z-10">Subscribe to Our Blog</span>
+                <ArrowRight size={24} className="relative z-10 group-hover:translate-x-1 transition-transform duration-300" />
               </button>
             </div>
           </div>

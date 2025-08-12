@@ -3,8 +3,10 @@ import React, { useState, useEffect, useRef } from "react";
 import { ChevronDown, Heart, Globe, ArrowRight, HandHeart, Users, Target, Award, Play } from "lucide-react";
 import { STRIPE_DONATION_LINK } from "@/config/constants";
 import { gsap } from "gsap";
+import { useRouter } from "next/navigation";
 
 const LandingPage = () => {
+  const router = useRouter();
   const [scrollY, setScrollY] = useState(0);
   const [isVisible, setIsVisible] = useState({
     'hero-content': true,  // Set hero content to visible by default
@@ -87,6 +89,10 @@ const LandingPage = () => {
 
   const handleDonateClick = () => {
     window.open(STRIPE_DONATION_LINK, '_blank');
+  };
+
+  const handleLearnMoreClick = () => {
+    router.push('/pages/blog');
   };
 
   // Function to reset stats to zero
@@ -287,28 +293,28 @@ const LandingPage = () => {
       `}</style>
 
       {/* Hero Section */}
-      <main className="relative min-h-screen flex items-center justify-center">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full w-full">
-          <div className="flex flex-col lg:grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-16 items-center justify-center h-full pt-16 sm:pt-20 lg:pt-28 pb-8 sm:pb-12">
+      <main className="relative mobile-hero-height">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center h-full pt-20 lg:pt-28 pb-12">
             
             {/* Left Column - Content */}
             <div 
               id="hero-content"
-              className={`space-y-4 sm:space-y-6 lg:space-y-8 text-center lg:text-left ${
+              className={`space-y-6 lg:space-y-8 ${
                 isVisible['hero-content'] ? 'animate-slideInLeft' : 'opacity-100'
               }`}
             >
               {/* Badge */}
               <div 
-                className="inline-flex items-center px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-[#833556]/10 text-[#833556] text-xs sm:text-sm font-medium glass-effect text-animate-container"
+                className="inline-flex items-center px-4 py-2 rounded-full bg-[#833556]/10 text-[#833556] text-sm font-medium glass-effect text-animate-container"
               >
-                <Globe size={14} className="mr-1.5 sm:mr-2 sm:w-4 sm:h-4" />
-                <span className="text-xs sm:text-sm">Making a Global Impact</span>
+                <Globe size={16} className="mr-2" />
+                Making a Global Impact
               </div>
 
               {/* Main Heading */}
               <h1 
-                className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-bold text-gray-900 leading-tight text-animate-container px-2"
+                className="text-3xl sm:text-4xl lg:text-6xl font-bold text-gray-900 leading-tight text-animate-container"
               >
                 Transforming Lives
                 <br />
@@ -319,7 +325,7 @@ const LandingPage = () => {
 
               {/* Subtitle */}
               <p 
-                className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 leading-relaxed max-w-xl text-animate-container px-4"
+                className="text-base sm:text-lg lg:text-xl text-gray-600 leading-relaxed max-w-xl text-animate-container"
               >
                 Join us in our mission to connect people with opportunities for
                 transformation through faith, community support, and sustainable
@@ -328,24 +334,27 @@ const LandingPage = () => {
 
               {/* Action Buttons */}
               <div 
-                className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-4 px-4"
+                className="flex flex-col sm:flex-row gap-4 pt-4"
               >
-                <button className="group relative px-5 py-3 sm:px-6 sm:py-4 lg:px-8 lg:py-4 bg-[#833556] text-white font-semibold text-sm sm:text-base lg:text-lg rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-105 transform hover:-translate-y-2 flex items-center justify-center gap-2 mobile-optimized overflow-hidden min-h-[44px] sm:min-h-[48px] lg:min-h-[56px]" onClick={handleDonateClick}>
+                <button className="group relative px-6 py-4 lg:px-8 lg:py-4 bg-[#833556] text-white font-semibold text-base lg:text-lg rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-105 transform hover:-translate-y-2 flex items-center justify-center gap-2 mobile-optimized overflow-hidden" onClick={handleDonateClick}>
                   <div className="absolute inset-0 bg-gradient-to-r from-[#833556] via-[#a04066] to-[#833556] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-600" />
                   <div className="relative z-10 flex items-center justify-center gap-2">
-                    <Heart size={18} className="group-hover:animate-pulse sm:w-5 sm:h-5" />
-                    <span className="text-sm sm:text-base">Donate Now</span>
+                    <Heart size={20} className="group-hover:animate-pulse" />
+                    Donate Now
                   </div>
                 </button>
 
-                <button className="group relative px-5 py-3 sm:px-6 sm:py-4 lg:px-8 lg:py-4 bg-transparent border-2 border-gray-300 text-gray-700 font-semibold text-sm sm:text-base lg:text-lg rounded-2xl hover:border-[#833556] hover:text-[#833556] transition-all duration-300 hover:scale-105 transform hover:-translate-y-2 flex items-center justify-center gap-2 mobile-optimized overflow-hidden min-h-[44px] sm:min-h-[48px] lg:min-h-[56px]">
+                <button 
+                  onClick={handleLearnMoreClick}
+                  className="group relative px-6 py-4 lg:px-8 lg:py-4 bg-transparent border-2 border-gray-300 text-gray-700 font-semibold text-base lg:text-lg rounded-2xl hover:border-[#833556] hover:text-[#833556] transition-all duration-300 hover:scale-105 transform hover:-translate-y-2 flex items-center justify-center gap-2 mobile-optimized overflow-hidden"
+                >
                   <div className="absolute inset-0 bg-gradient-to-r from-[#833556]/5 to-[#a04066]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   <div className="relative z-10 flex items-center justify-center gap-2">
-                    <span className="text-sm sm:text-base">Learn More</span>
+                    Learn More
                     <ArrowRight
-                      size={18}
-                      className="group-hover:translate-x-2 transition-transform duration-300 sm:w-5 sm:h-5"
+                      size={20}
+                      className="group-hover:translate-x-2 transition-transform duration-300"
                     />
                   </div>
                 </button>
@@ -353,15 +362,15 @@ const LandingPage = () => {
 
               {/* Trust Indicators */}
               <div 
-                className="flex items-center justify-center lg:justify-start space-x-4 sm:space-x-6 pt-4 sm:pt-6 lg:pt-8 px-4"
+                className="flex items-center space-x-6 pt-6 lg:pt-8"
               >
-                <div className="flex items-center space-x-1.5 sm:space-x-2">
-                  <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-green-500 rounded-full animate-pulse" />
-                  <span className="text-xs sm:text-sm text-gray-600">Verified Impact</span>
+                <div className="flex items-center space-x-2">
+                  <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse" />
+                  <span className="text-sm text-gray-600">Verified Impact</span>
                 </div>
-                <div className="flex items-center space-x-1.5 sm:space-x-2">
-                  <Award size={14} className="text-[#833556] sm:w-4 sm:h-4" />
-                  <span className="text-xs sm:text-sm text-gray-600">Award Winner</span>
+                <div className="flex items-center space-x-2">
+                  <Award size={16} className="text-[#833556]" />
+                  <span className="text-sm text-gray-600">Award Winner</span>
                 </div>
               </div>
             </div>
@@ -449,13 +458,13 @@ const LandingPage = () => {
       </main>
 
       {/* Stats Section */}
-      <section className="py-12 sm:py-16 lg:py-24 bg-gradient-to-r from-[#833556] to-[#a04066] relative overflow-hidden">
+      <section className="py-16 lg:py-24 bg-gradient-to-r from-[#833556] to-[#a04066] relative overflow-hidden">
         <div className="absolute inset-0 bg-black/10" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div 
             ref={statsRef}
             id="stats"
-            className={`grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 ${
+            className={`grid grid-cols-2 lg:grid-cols-4 gap-8 ${
               isVisible['stats'] ? 'animate-slideInUp' : 'opacity-0'
             }`}
           >
@@ -464,19 +473,19 @@ const LandingPage = () => {
               return (
                 <div 
                   key={index} 
-                  className="text-center group p-3 sm:p-4"
+                  className="text-center group"
                   style={{ animationDelay: `${index * 0.1}s` }}
                 >
-                  <div className="inline-flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 lg:w-16 lg:h-16 bg-white/20 rounded-xl sm:rounded-2xl mb-3 sm:mb-4 group-hover:bg-white/30 transition-colors duration-300">
-                    <IconComponent size={20} className="text-white sm:w-6 sm:h-6 lg:w-6 lg:h-6" />
+                  <div className="inline-flex items-center justify-center w-12 h-12 lg:w-16 lg:h-16 bg-white/20 rounded-2xl mb-4 group-hover:bg-white/30 transition-colors duration-300">
+                    <IconComponent size={24} className="text-white" />
                   </div>
                   <div 
-                    className="stat-number text-xl sm:text-2xl lg:text-4xl font-bold text-white mb-1 sm:mb-2"
+                    className="stat-number text-2xl lg:text-4xl font-bold text-white mb-2"
                     data-value={stat.number}
                   >
                     0
                   </div>
-                  <div className="text-white/80 font-medium text-xs sm:text-sm lg:text-base">{stat.label}</div>
+                  <div className="text-white/80 font-medium">{stat.label}</div>
                 </div>
               );
             })}
