@@ -292,7 +292,7 @@ export default function BlogPage() {
               isVisible['hero-content'] ? 'animate-fadeInUp' : 'opacity-0'
             }`}
           >
-            <div className="inline-flex items-center px-6 py-3 rounded-full bg-white/20 backdrop-blur-lg text-[#833556] text-sm font-medium mb-8 border border-white/30 glass-effect drop-shadow-lg">
+            <div className="inline-flex items-center px-4 py-2 rounded-full bg-[#833556]/90 text-white text-sm font-medium mb-4 backdrop-blur-sm">
               <BookOpen size={16} className="mr-2" />
               Our Blog
             </div>
@@ -328,7 +328,7 @@ export default function BlogPage() {
               isVisible['stats-header'] ? 'animate-fadeInUp' : 'opacity-0'
             }`}
           >
-            <div className="inline-flex items-center px-4 py-2 rounded-full bg-[#833556]/10 text-[#833556] text-sm font-medium mb-6 glass-effect">
+            <div className="inline-flex items-center px-4 py-2 rounded-full bg-[#833556]/90 text-white text-sm font-medium mb-4 backdrop-blur-sm">
               <BookOpen size={16} className="mr-2" />
               Blog Statistics
             </div>
@@ -383,7 +383,7 @@ export default function BlogPage() {
                 isVisible['featured-header'] ? 'animate-fadeInUp' : 'opacity-0'
               }`}
             >
-              <div className="inline-flex items-center px-4 py-2 rounded-full bg-[#833556]/10 text-[#833556] text-sm font-medium mb-6 glass-effect">
+              <div className="inline-flex items-center px-4 py-2 rounded-full bg-[#833556]/90 text-white text-sm font-medium mb-4 backdrop-blur-sm">
                 <Star size={16} className="mr-2" />
                 Featured Stories
               </div>
@@ -483,7 +483,7 @@ export default function BlogPage() {
               isVisible['blog-header'] ? 'animate-fadeInUp' : 'opacity-0'
             }`}
           >
-            <div className="inline-flex items-center px-4 py-2 rounded-full bg-[#833556]/10 text-[#833556] text-sm font-medium mb-6 glass-effect">
+            <div className="inline-flex items-center px-4 py-2 rounded-full bg-[#833556]/90 text-white text-sm font-medium mb-4 backdrop-blur-sm">
               <BookOpen size={16} className="mr-2" />
               Latest Articles
             </div>

@@ -306,7 +306,7 @@ const LandingPage = () => {
             >
               {/* Badge */}
               <div 
-                className="inline-flex items-center px-4 py-2 rounded-full bg-[#833556]/10 text-[#833556] text-sm font-medium glass-effect text-animate-container"
+                className="inline-flex items-center px-4 py-2 rounded-full bg-[#833556]/90 text-white text-sm font-medium mb-4 backdrop-blur-sm text-animate-container"
               >
                 <Globe size={16} className="mr-2" />
                 Making a Global Impact

@@ -6,3 +6,4 @@ export const SITE_NAME = 'Faith Feeds International';
 export const CONTACT_PHONE = '+1 (405) 535-1599';
 export const CONTACT_EMAIL = 'info@faithfeedsinternational.org';
 export const ADDRESS = '3528 SE 94 street Okc';
+

@@ -274,7 +274,7 @@ const ServicesSection = () => {
             }`}
           >
             {/* Badge */}
-            <div className="inline-flex items-center px-4 py-2 rounded-full bg-[#833556]/10 text-[#833556] text-sm font-medium mb-6 glass-effect">
+            <div className="inline-flex items-center px-4 py-2 rounded-full bg-[#833556]/90 text-white text-sm font-medium mb-4 backdrop-blur-sm">
               <Star size={16} className="mr-2" />
               Our Impact Areas
             </div>

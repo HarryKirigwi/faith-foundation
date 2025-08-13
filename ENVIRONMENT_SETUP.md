@@ -48,3 +48,4 @@ After setting up the environment variable:
 - The `NEXT_PUBLIC_` prefix makes this variable available in the browser
 - This is safe for donation links as they are meant to be public
 - The link is read-only and cannot be modified by users
+

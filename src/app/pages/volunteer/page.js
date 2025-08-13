@@ -248,7 +248,7 @@ export default function VolunteerPage() {
                isVisible['hero-content'] ? 'animate-fadeInUp' : 'opacity-0'
              }`}
            >
-             <div className="inline-flex items-center px-6 py-3 rounded-full bg-white/20 backdrop-blur-lg text-white text-sm font-medium mb-8 border border-white/30 glass-effect">
+             <div className="inline-flex items-center px-4 py-2 rounded-full bg-[#833556]/90 text-white text-sm font-medium mb-4 backdrop-blur-sm">
                <HandHeart size={16} className="mr-2" />
                Volunteer With Us
              </div>
@@ -303,7 +303,7 @@ export default function VolunteerPage() {
                  isVisible['stats-header'] ? 'animate-fadeInUp' : 'opacity-0'
                }`}
              >
-               <div className="inline-flex items-center px-4 py-2 rounded-full bg-[#833556]/10 text-[#833556] text-sm font-medium mb-6 glass-effect">
+               <div className="inline-flex items-center px-4 py-2 rounded-full bg-[#833556]/90 text-white text-sm font-medium mb-4 backdrop-blur-sm">
                  <Users size={16} className="mr-2" />
                  Volunteer Impact
                </div>
@@ -358,7 +358,7 @@ export default function VolunteerPage() {
               isVisible['opportunities-header'] ? 'animate-fadeInUp' : 'opacity-0'
             }`}
           >
-            <div className="inline-flex items-center px-4 py-2 rounded-full bg-[#833556]/10 text-[#833556] text-sm font-medium mb-6 glass-effect">
+            <div className="inline-flex items-center px-4 py-2 rounded-full bg-[#833556]/90 text-white text-sm font-medium mb-4 backdrop-blur-sm">
               <Target size={16} className="mr-2" />
               Volunteer Opportunities
             </div>
