@@ -286,9 +286,12 @@ export default function ProjectsPage() {
             </div>
 
             <div className="mt-8">
-              <button className="group relative px-8 py-4 lg:px-10 lg:py-5 bg-[#833556] text-white font-bold text-lg lg:text-xl rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-105 transform hover:-translate-y-2 flex items-center justify-center gap-3 mx-auto mobile-optimized overflow-hidden">
+              <button 
+                onClick={handleDonateClick}
+                className="group relative px-8 py-4 lg:px-10 lg:py-5 bg-[#833556] text-white font-bold text-lg lg:text-xl rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-105 transform hover:-translate-y-2 flex items-center justify-center gap-3 mx-auto mobile-optimized overflow-hidden"
+              >
                 <Heart size={24} className="relative z-10 group-hover:animate-pulse" />
-                <span className="relative z-10">Support Our Projects</span>
+                <span className="relative z-10">Donate Now</span>
                 <ArrowRight size={24} className="relative z-10 group-hover:translate-x-1 transition-transform duration-300" />
               </button>
             </div>
@@ -510,6 +513,19 @@ export default function ProjectsPage() {
             Every project we undertake is made possible by the generosity of our donors and volunteers.
           </p>
           
+          {/* Donation Impact Message */}
+          <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 lg:p-8 mb-8 lg:mb-12 border border-white/20 max-w-4xl mx-auto">
+            <p className="text-base sm:text-lg lg:text-xl text-white/95 leading-relaxed mb-4">
+              <span className="font-semibold text-[#ffd700]">Behind every project number, there's a child's story.</span> A story of hunger turned to hope, of empty classrooms filled with laughter, of bare feet finding shoes, and of dreams finding wings. Your support writes these stories.
+            </p>
+            <p className="text-base sm:text-lg lg:text-xl text-white/95 leading-relaxed mb-4">
+              <span className="font-semibold text-[#ffd700]">Every project we undertake is a promise kept.</span> A promise to feed the hungry, educate the eager, and empower the overlooked. Your donation isn't just funding — it's faith in action, love made visible, and hope made tangible.
+            </p>
+            <p className="text-base sm:text-lg lg:text-xl text-white/95 leading-relaxed">
+              <span className="font-semibold text-[#ffd700]">Choose to be part of something bigger than yourself.</span> Because when you invest in our projects, you're not just giving money — you're giving a child their first meal of the day, their first notebook, their first chance to believe in tomorrow.
+            </p>
+          </div>
+          
           <div className="flex flex-col sm:flex-row gap-4 lg:gap-6 justify-center">
             <button onClick={handleDonateClick} className="group relative px-8 py-4 lg:px-10 lg:py-5 bg-white text-[#833556] font-bold text-lg lg:text-xl rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-105 transform hover:-translate-y-2 flex items-center justify-center gap-3 mobile-optimized overflow-hidden">
               <Heart size={24} className="relative z-10 group-hover:animate-pulse" />
@@ -517,9 +533,12 @@ export default function ProjectsPage() {
               <ArrowRight size={24} className="relative z-10 group-hover:translate-x-1 transition-transform duration-300" />
             </button>
             
-            <button className="group relative px-8 py-4 lg:px-10 lg:py-5 bg-transparent border-2 border-white text-white font-bold text-lg lg:text-xl rounded-2xl hover:bg-white hover:text-[#833556] transition-all duration-300 hover:scale-105 transform hover:-translate-y-2 flex items-center justify-center gap-3 mobile-optimized">
+            <button 
+              onClick={() => router.push('/pages/volunteer')}
+              className="group relative px-8 py-4 lg:px-10 lg:py-5 bg-transparent border-2 border-white text-white font-bold text-lg lg:text-xl rounded-2xl hover:bg-white hover:text-[#833556] transition-all duration-300 hover:scale-105 transform hover:-translate-y-2 flex items-center justify-center gap-3 mobile-optimized"
+            >
               <Users size={24} className="group-hover:animate-pulse" />
-              <span>Volunteer</span>
+              <span>Volunteer Now</span>
             </button>
           </div>
         </div>

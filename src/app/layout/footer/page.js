@@ -87,14 +87,20 @@ const FaithFeedsFooter = () => {
                 <MapPin size={16} className="text-[#833556] flex-shrink-0" />
                 <span>Oklahoma City, OK</span>
               </div>
-              <div className="flex items-center space-x-3 text-sm text-gray-300">
+              <a 
+                href="tel:+14055351599"
+                className="flex items-center space-x-3 text-sm text-gray-300 hover:text-[#833556] transition-colors duration-300 cursor-pointer"
+              >
                 <Phone size={16} className="text-[#833556] flex-shrink-0" />
                 <span>+1 (405) 535-1599</span>
-              </div>
-              <div className="flex items-center space-x-3 text-sm text-gray-300">
+              </a>
+              <a 
+                href="mailto:faithfeedsInternational@gmail.com"
+                className="flex items-center space-x-3 text-sm text-gray-300 hover:text-[#833556] transition-colors duration-300 cursor-pointer"
+              >
                 <Mail size={16} className="text-[#833556] flex-shrink-0" />
                 <span>faithfeedsInternational@gmail.com</span>
-              </div>
+              </a>
             </div>
           </div>
 

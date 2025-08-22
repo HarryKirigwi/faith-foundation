@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
+import { useRouter } from 'next/navigation';
 import {
   Heart,
   Users,
@@ -27,6 +28,7 @@ import { STRIPE_DONATION_LINK } from '@/config/constants';
 import { gsap } from "gsap";
 
 const WhatWeDoPage = () => {
+  const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrollY, setScrollY] = useState(0);
   const [isVisible, setIsVisible] = useState({});
@@ -276,50 +278,6 @@ const WhatWeDoPage = () => {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* SEO Meta Tags */}
-      <head>
-        <title>
-          What We Do - Faith Feeds International | Supporting Children & Youth
-          Development
-        </title>
-        <meta
-          name="description"
-          content="Discover how Faith Feeds International supports children and youth through education, shelter homes, healthcare, and empowerment programs. Learn about our comprehensive approach to child development."
-        />
-        <meta
-          name="keywords"
-          content="child support, youth development, education programs, shelter homes, underprivileged children, faith-based charity, volunteer opportunities, donate to children"
-        />
-        <meta
-          property="og:title"
-          content="What We Do - Faith Feeds International | Supporting Children & Youth Development"
-        />
-        <meta
-          property="og:description"
-          content="We support children and youth to reach their full potential through education, shelter homes, healthcare, and empowerment programs across multiple regions."
-        />
-        <meta property="og:type" content="website" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link
-          rel="canonical"
-          href="https://faithfeedsinternational.org/what-we-do"
-        />
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Organization",
-            name: "Faith Feeds International",
-            description:
-              "Supporting children and youth to reach their full potential through comprehensive care and education programs",
-            url: "https://faithfeedsinternational.org",
-            logo: "http://faithcp.rf.gd/wp-content/uploads/2025/06/FFI-LOGO.png",
-            sameAs: [
-              "https://facebook.com/faithfeedsinternational",
-              "https://twitter.com/faithfeedsinternational",
-            ],
-          })}
-        </script>
-      </head>
 
       {/* Enhanced Hero Section */}
       <section 
@@ -385,10 +343,13 @@ const WhatWeDoPage = () => {
 
               {/* CTA Buttons */}
               <div className="flex flex-col sm:flex-row gap-4 mb-8">
-                <button className="group relative px-8 py-4 bg-[#833556] text-white font-semibold text-lg rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 transform hover:-translate-y-1 flex items-center justify-center gap-2 cursor-pointer">
+                <button 
+                  onClick={() => router.push('/pages/volunteer')}
+                  className="group relative px-8 py-4 bg-[#833556] text-white font-semibold text-lg rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 transform hover:-translate-y-1 flex items-center justify-center gap-2 cursor-pointer"
+                >
                   <div className="relative z-10 flex items-center justify-center gap-2">
                     <Users size={20} />
-                    Become a Volunteer
+                    Volunteer Now
                   </div>
                   <div className="absolute inset-0 bg-gradient-to-r from-[#833556] to-[#a04066] rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </button>
@@ -604,13 +565,19 @@ const WhatWeDoPage = () => {
 
                   {/* CTA Buttons */}
                   <div className="flex flex-col sm:flex-row gap-4">
-                    <button className="group cursor-pointer px-6 py-3 bg-[#833556] text-white font-semibold rounded-lg hover:bg-[#a04066] transition-all duration-300 hover:scale-105 transform flex items-center justify-center gap-2">
+                    <button 
+                      onClick={() => router.push('/pages/volunteer')}
+                      className="group cursor-pointer px-6 py-3 bg-[#833556] text-white font-semibold rounded-lg hover:bg-[#a04066] transition-all duration-300 hover:scale-105 transform flex items-center justify-center gap-2"
+                    >
                       <Users size={18} />
-                      Get Involved
+                      Volunteer Now
                     </button>
-                    <button className="group cursor-pointer px-6 py-3 bg-transparent border-2 border-[#833556] text-[#833556] font-semibold rounded-lg hover:bg-[#833556] hover:text-white transition-all duration-300 hover:scale-105 transform flex items-center justify-center gap-2">
+                    <button 
+                      onClick={handleDonateClick}
+                      className="group cursor-pointer px-6 py-3 bg-transparent border-2 border-[#833556] text-[#833556] font-semibold rounded-lg hover:bg-[#833556] hover:text-white transition-all duration-300 hover:scale-105 transform flex items-center justify-center gap-2"
+                    >
                       <Heart size={18} />
-                      Support This Cause
+                      Donate Now
                     </button>
                   </div>
                 </div>
@@ -661,16 +628,35 @@ const WhatWeDoPage = () => {
               creating lasting change.
             </p>
 
+            {/* Donation Impact Message */}
+            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 lg:p-8 mb-8 border border-white/20 max-w-4xl mx-auto">
+              <p className="text-base sm:text-lg lg:text-xl text-purple-100 leading-relaxed mb-4">
+                <span className="font-semibold text-[#ffd700]">What we do is simple: we turn "impossible" into "I'm possible."</span> We take children who've never known a full stomach and give them breakfast. We take empty hands and fill them with pencils. We take broken dreams and mend them with hope.
+              </p>
+              <p className="text-base sm:text-lg lg:text-xl text-purple-100 leading-relaxed mb-4">
+                <span className="font-semibold text-[#ffd700]">Your donation is the bridge between despair and dreams.</span> It's the difference between a child going to bed hungry and going to bed with a full heart. It's the transformation from "I can't" to "I can and I will." Every dollar you give becomes a step toward a brighter future.
+              </p>
+              <p className="text-base sm:text-lg lg:text-xl text-purple-100 leading-relaxed">
+                <span className="font-semibold text-[#ffd700]">Be the reason a child believes in miracles.</span> Because sometimes the greatest miracle isn't parting seas or walking on water — it's a child who finally gets to eat, learn, and dream without the weight of hunger crushing their spirit.
+              </p>
+            </div>
+
             {/* Contact Info */}
             <div className="flex flex-col sm:flex-row justify-center items-center gap-6 mb-8 text-purple-100">
-              <div className="flex items-center space-x-2">
+              <a 
+                href="tel:+14055351599"
+                className="flex items-center space-x-2 hover:text-white transition-colors duration-300 cursor-pointer"
+              >
                 <Phone size={20} className="text-purple-200" />
                 <span>+1 (405) 535-1599</span>
-              </div>
-              <div className="flex items-center space-x-2">
+              </a>
+              <a 
+                href="mailto:faithfeedsInternational@gmail.com"
+                className="flex items-center space-x-2 hover:text-white transition-colors duration-300 cursor-pointer"
+              >
                 <Mail size={20} className="text-purple-200" />
                 <span>faithfeedsInternational@gmail.com</span>
-              </div>
+              </a>
               <div className="flex items-center space-x-2">
                 <MapPin size={20} className="text-purple-200" />
                 <span>Oklahoma City, OK</span>
@@ -679,9 +665,12 @@ const WhatWeDoPage = () => {
 
             {/* Action Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="group cursor-pointer relative px-8 py-4 bg-white text-[#833556] font-semibold text-lg rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 transform hover:-translate-y-1 flex items-center justify-center gap-2">
+              <button 
+                onClick={() => router.push('/pages/volunteer')}
+                className="group cursor-pointer relative px-8 py-4 bg-white text-[#833556] font-semibold text-lg rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 transform hover:-translate-y-1 flex items-center justify-center gap-2"
+              >
                 <Users size={20} />
-                Become a Volunteer
+                Volunteer Now
                 <ArrowRight
                   size={20}
                   className="group-hover:translate-x-1 transition-transform duration-300"

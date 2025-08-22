@@ -93,8 +93,8 @@ const ServicesSection = () => {
         window.open(STRIPE_DONATION_LINK, '_blank');
         break;
       case 'volunteer':
-        // Navigate to volunteer page or open volunteer form
-        console.log(`Volunteer clicked for ${title}`);
+        // Navigate to volunteer page
+        router.push('/pages/volunteer');
         break;
       case 'share':
         // Share functionality
@@ -346,6 +346,13 @@ const ServicesSection = () => {
                     {service.description}
                   </p>
 
+                                  {/* Donation Impact Message for Service Cards */}
+                <div className="bg-gradient-to-r from-[#833556]/5 to-[#a04066]/5 rounded-xl p-4 mb-6 border border-[#833556]/10">
+                  <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
+                    <span className="font-semibold text-[#833556]">Transform lives with your generosity:</span> Every donation becomes a child's breakfast, a student's notebook, or a family's hope. Your gift creates ripples of change that last a lifetime.
+                  </p>
+                </div>
+
                   {/* Action Button with Enhanced Effects */}
                   <button
                     onClick={() => handleButtonClick(service.buttonAction, service.title)}
@@ -398,11 +405,27 @@ const ServicesSection = () => {
                   Join our mission to transform lives through faith and community. Every action counts, every donation matters.
                 </p>
                 
+                {/* Donation Impact Message */}
+                <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 lg:p-8 mb-8 border border-white/20 max-w-4xl mx-auto">
+                  <p className="text-base sm:text-lg lg:text-xl text-white/95 leading-relaxed mb-4">
+                    <span className="font-semibold text-[#ffd700]">In a world where some children count meals by the week, not by the day.</span> Where a notebook is more precious than gold, and a pair of shoes is a luxury beyond reach. This is the reality we're changing, one child at a time.
+                  </p>
+                  <p className="text-base sm:text-lg lg:text-xl text-white/95 leading-relaxed mb-4">
+                    <span className="font-semibold text-[#ffd700]">Your generosity is the catalyst for transformation.</span> It's the spark that ignites hope, the foundation that builds futures, and the love that heals hearts. Every contribution, no matter the size, becomes a beacon of light in a child's darkest moments.
+                  </p>
+                  <p className="text-base sm:text-lg lg:text-xl text-white/95 leading-relaxed">
+                    <span className="font-semibold text-[#ffd700]">Stand with us in this holy work.</span> Because when you give to Faith Feeds International, you're not just donating — you're declaring that every child matters, every dream is valid, and every life is worth fighting for.
+                  </p>
+                </div>
+                
                 <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                  <button className="group relative px-8 py-4 bg-white text-[#833556] font-bold text-lg rounded-2xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 flex items-center gap-3 mobile-optimized overflow-hidden">
+                  <button 
+                    onClick={() => router.push('/pages/volunteer')}
+                    className="group relative px-8 py-4 bg-white text-[#833556] font-bold text-lg rounded-2xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 flex items-center gap-3 mobile-optimized overflow-hidden"
+                  >
                     <div className="absolute inset-0 bg-gradient-to-r from-gray-50 to-white opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
                     <HandHeart size={20} className="relative z-10 group-hover:animate-pulse" />
-                    <span className="relative z-10">Get Started Today</span>
+                    <span className="relative z-10">Volunteer Now</span>
                     <ArrowRight size={20} className="relative z-10 group-hover:translate-x-1 transition-transform duration-200" />
                   </button>
                   

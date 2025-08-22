@@ -272,7 +272,15 @@ export default function VolunteerPage() {
              </div>
 
              <div className="mt-8">
-               <button className="group relative px-8 py-4 lg:px-10 lg:py-5 bg-[#833556] text-white font-bold text-lg lg:text-xl rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-105 transform hover:-translate-y-2 flex items-center justify-center gap-3 mx-auto mobile-optimized overflow-hidden">
+               <button 
+                 onClick={() => {
+                   const formSection = document.getElementById('volunteer-form');
+                   if (formSection) {
+                     formSection.scrollIntoView({ behavior: 'smooth' });
+                   }
+                 }}
+                 className="group relative px-8 py-4 lg:px-10 lg:py-5 bg-[#833556] text-white font-bold text-lg lg:text-xl rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-105 transform hover:-translate-y-2 flex items-center justify-center gap-3 mx-auto mobile-optimized overflow-hidden"
+               >
                  <Heart size={24} className="relative z-10 group-hover:animate-pulse" />
                  <span className="relative z-10">Start Volunteering</span>
                  <ArrowRight size={24} className="relative z-10 group-hover:translate-x-1 transition-transform duration-300" />
@@ -472,13 +480,326 @@ export default function VolunteerPage() {
                     {opportunity.description}
                   </p>
 
-                  <button className="group w-full px-6 py-3 bg-[#833556] text-white font-semibold rounded-xl hover:bg-[#a04066] transition-all duration-300 hover:scale-105 transform flex items-center justify-center gap-2 mobile-optimized">
+                  <button 
+                    onClick={() => {
+                      const formSection = document.getElementById('volunteer-form');
+                      if (formSection) {
+                        formSection.scrollIntoView({ behavior: 'smooth' });
+                      }
+                    }}
+                    className="group w-full px-6 py-3 bg-[#833556] text-white font-semibold rounded-xl hover:bg-[#a04066] transition-all duration-300 hover:scale-105 transform flex items-center justify-center gap-2 mobile-optimized"
+                  >
                     <span>Apply Now</span>
                     <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform duration-300" />
                   </button>
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Volunteer Application Form */}
+      <section className="py-16 lg:py-24 bg-white relative overflow-hidden" id="volunteer-form">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div 
+            id="form-header"
+            className={`text-center mb-12 lg:mb-16 ${
+              isVisible['form-header'] ? 'animate-fadeInUp' : 'opacity-0'
+            }`}
+          >
+            <div className="inline-flex items-center px-4 py-2 rounded-full bg-[#833556]/90 text-white text-sm font-medium mb-4 backdrop-blur-sm">
+              <HandHeart size={16} className="mr-2" />
+              Volunteer Application
+            </div>
+            <h2 className="text-3xl sm:text-4xl lg:text-6xl font-bold text-gray-900 leading-tight mb-6">
+              Join Our
+              <span className="text-[#833556] block mt-2 bg-gradient-to-r from-[#833556] to-[#a04066] bg-clip-text text-transparent">
+                Volunteer Team
+              </span>
+            </h2>
+            <p className="text-lg sm:text-xl lg:text-2xl text-gray-600 leading-relaxed max-w-4xl mx-auto">
+              Tell us about your interests and availability. A Faith Feeds International representative will reach out to discuss volunteer opportunities that match your skills and schedule.
+            </p>
+          </div>
+
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+            {/* Application Form */}
+            <div 
+              id="volunteer-form-content"
+              className={`${
+                isVisible['volunteer-form-content'] ? 'animate-slideInLeft' : 'opacity-0'
+              }`}
+            >
+              <form className="space-y-6">
+                {/* Personal Information */}
+                <div className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-3xl p-6 lg:p-8">
+                  <h3 className="text-xl lg:text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                    <User size={24} className="mr-3 text-[#833556]" />
+                    Personal Information
+                  </h3>
+                  
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div>
+                      <label className="block text-sm font-semibold text-gray-700 mb-2">
+                        First Name *
+                      </label>
+                      <input
+                        type="text"
+                        required
+                        className="w-full px-4 py-4 border-2 border-gray-300 rounded-2xl focus:ring-2 focus:ring-[#833556] focus:border-transparent transition-all duration-300 text-gray-900 placeholder:text-gray-500 hover:border-[#833556]/50"
+                        placeholder="Enter your first name"
+                      />
+                    </div>
+                    
+                    <div>
+                      <label className="block text-sm font-semibold text-gray-700 mb-2">
+                        Last Name *
+                      </label>
+                      <input
+                        type="text"
+                        required
+                        className="w-full px-4 py-4 border-2 border-gray-300 rounded-2xl focus:ring-2 focus:ring-[#833556] focus:border-transparent transition-all duration-300 text-gray-900 placeholder:text-gray-500 hover:border-[#833556]/50"
+                        placeholder="Enter your last name"
+                      />
+                    </div>
+                    
+                    <div>
+                      <label className="block text-sm font-semibold text-gray-700 mb-2">
+                        Email Address *
+                      </label>
+                      <input
+                        type="email"
+                        required
+                        className="w-full px-4 py-4 border-2 border-gray-300 rounded-2xl focus:ring-2 focus:ring-[#833556] focus:border-transparent transition-all duration-300 text-gray-900 placeholder:text-gray-500 hover:border-[#833556]/50"
+                        placeholder="your.email@example.com"
+                      />
+                    </div>
+                    
+                    <div>
+                      <label className="block text-sm font-semibold text-gray-700 mb-2">
+                        Phone Number *
+                      </label>
+                      <input
+                        type="tel"
+                        required
+                        className="w-full px-4 py-4 border-2 border-gray-300 rounded-2xl focus:ring-2 focus:ring-[#833556] focus:border-transparent transition-all duration-300 text-gray-900 placeholder:text-gray-500 hover:border-[#833556]/50"
+                        placeholder="+1 (405) 535-1599"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Volunteer Preferences */}
+                <div className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-3xl p-6 lg:p-8">
+                  <h3 className="text-xl lg:text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                    <Target size={24} className="mr-3 text-[#833556]" />
+                    Volunteer Preferences
+                  </h3>
+                  
+                  <div className="space-y-6">
+                    <div>
+                      <label className="block text-sm font-semibold text-gray-700 mb-2">
+                        Areas of Interest *
+                      </label>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        {[
+                          'Education & Tutoring',
+                          'Food Distribution',
+                          'Community Outreach',
+                          'Administrative Support',
+                          'Event Planning',
+                          'Fundraising',
+                          'Healthcare Support',
+                          'Youth Programs'
+                        ].map((area) => (
+                          <label key={area} className="flex items-center space-x-3 cursor-pointer">
+                            <input
+                              type="checkbox"
+                              className="w-4 h-4 text-[#833556] border-gray-300 rounded focus:ring-[#833556] focus:ring-2"
+                            />
+                            <span className="text-sm text-gray-700">{area}</span>
+                          </label>
+                        ))}
+                      </div>
+                    </div>
+                    
+                    <div>
+                      <label className="block text-sm font-semibold text-gray-700 mb-2">
+                        Availability *
+                      </label>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        {[
+                          'Weekdays (Morning)',
+                          'Weekdays (Afternoon)',
+                          'Weekdays (Evening)',
+                          'Weekends',
+                          'Flexible Schedule',
+                          'One-time Events'
+                        ].map((time) => (
+                          <label key={time} className="flex items-center space-x-3 cursor-pointer">
+                            <input
+                              type="checkbox"
+                              className="w-4 h-4 text-[#833556] border-gray-300 rounded focus:ring-[#833556] focus:ring-2"
+                            />
+                            <span className="text-sm text-gray-700">{time}</span>
+                          </label>
+                        ))}
+                      </div>
+                    </div>
+                    
+                    <div>
+                      <label className="block text-sm font-semibold text-gray-700 mb-2">
+                        Time Commitment *
+                      </label>
+                      <select className="w-full px-4 py-4 border-2 border-gray-300 rounded-2xl focus:ring-2 focus:ring-[#833556] focus:border-transparent transition-all duration-300 text-gray-900">
+                        <option value="">Select your preferred commitment</option>
+                        <option value="1-2">1-2 hours per week</option>
+                        <option value="3-5">3-5 hours per week</option>
+                        <option value="6-10">6-10 hours per week</option>
+                        <option value="10+">10+ hours per week</option>
+                        <option value="flexible">Flexible - as needed</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Message */}
+                <div className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-3xl p-6 lg:p-8">
+                  <h3 className="text-xl lg:text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                    <Mail size={24} className="mr-3 text-[#833556]" />
+                    Tell Us About Yourself
+                  </h3>
+                  
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-700 mb-2">
+                      Why do you want to volunteer with Faith Feeds International? *
+                    </label>
+                    <textarea
+                      required
+                      rows={4}
+                      className="w-full px-4 py-4 border-2 border-gray-300 rounded-2xl focus:ring-2 focus:ring-[#833556] focus:border-transparent transition-all duration-300 text-gray-900 placeholder:text-gray-500 hover:border-[#833556]/50 resize-none"
+                      placeholder="Share your motivation, relevant experience, and how you'd like to contribute to our mission..."
+                    />
+                  </div>
+                  
+                  <div className="mt-6">
+                    <label className="block text-sm font-semibold text-gray-700 mb-2">
+                      Any specific skills or experience you'd like to share?
+                    </label>
+                    <textarea
+                      rows={3}
+                      className="w-full px-4 py-4 border-2 border-gray-300 rounded-2xl focus:ring-2 focus:ring-[#833556] focus:border-transparent transition-all duration-300 text-gray-900 placeholder:text-gray-500 hover:border-[#833556]/50 resize-none"
+                      placeholder="Languages, professional skills, previous volunteer experience, etc..."
+                    />
+                  </div>
+                </div>
+
+                {/* Submit Button */}
+                <div className="text-center">
+                  <button
+                    type="submit"
+                    className="group relative px-8 py-4 lg:px-12 lg:py-5 bg-[#833556] text-white font-bold text-lg lg:text-xl rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-105 transform hover:-translate-y-2 flex items-center justify-center gap-3 mx-auto mobile-optimized overflow-hidden"
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-r from-[#833556] via-[#a04066] to-[#833556] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <HandHeart size={24} className="relative z-10 group-hover:animate-pulse" />
+                    <span className="relative z-10">Submit Application</span>
+                    <ArrowRight size={24} className="relative z-10 group-hover:translate-x-1 transition-transform duration-300" />
+                  </button>
+                </div>
+              </form>
+            </div>
+
+            {/* Information Panel */}
+            <div 
+              id="volunteer-info"
+              className={`space-y-8 ${
+                isVisible['volunteer-info'] ? 'animate-slideInRight' : 'opacity-0'
+              }`}
+            >
+              <div>
+                <h3 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-6">
+                  How Volunteering Works
+                </h3>
+                <div className="space-y-6">
+                  <div className="flex items-start space-x-4">
+                    <div className="w-8 h-8 bg-[#833556] rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                      <span className="text-white font-bold text-sm">1</span>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-gray-900 mb-2">Submit Your Application</h4>
+                      <p className="text-gray-600 leading-relaxed">
+                        Fill out the form with your interests, skills, and availability. Tell us why you want to volunteer with Faith Feeds International.
+                      </p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start space-x-4">
+                    <div className="w-8 h-8 bg-[#833556] rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                      <span className="text-white font-bold text-sm">2</span>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-gray-900 mb-2">We'll Reach Out to You</h4>
+                      <p className="text-gray-600 leading-relaxed">
+                        A Faith Feeds International representative will contact you within 2-3 business days to discuss volunteer opportunities that match your profile.
+                      </p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start space-x-4">
+                    <div className="w-8 h-8 bg-[#833556] rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                      <span className="text-white font-bold text-sm">3</span>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-gray-900 mb-2">Get Started</h4>
+                      <p className="text-gray-600 leading-relaxed">
+                        Once we find the perfect match, you'll receive orientation and training. Then you can start making a difference in children's lives!
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-gradient-to-br from-[#833556]/5 to-[#a04066]/5 rounded-2xl p-6 border border-[#833556]/10">
+                <h4 className="font-semibold text-gray-900 mb-4 flex items-center">
+                  <CheckCircle size={20} className="mr-2 text-[#833556]" />
+                  What We Provide
+                </h4>
+                <ul className="space-y-2 text-sm text-gray-600">
+                  <li>• Orientation and training for all volunteers</li>
+                  <li>• Flexible scheduling to fit your availability</li>
+                  <li>• Support and guidance throughout your service</li>
+                  <li>• Recognition and appreciation for your contributions</li>
+                  <li>• Opportunities for growth and leadership</li>
+                </ul>
+              </div>
+
+              <div className="bg-gradient-to-br from-[#833556]/5 to-[#a04066]/5 rounded-2xl p-6 border border-[#833556]/10">
+                <h4 className="font-semibold text-gray-900 mb-4 flex items-center">
+                  <Phone size={20} className="mr-2 text-[#833556]" />
+                  Questions?
+                </h4>
+                <p className="text-sm text-gray-600 mb-3">
+                  Have questions about volunteering? We're here to help!
+                </p>
+                <div className="space-y-2 text-sm">
+                  <a 
+                    href="tel:+14055351599"
+                    className="flex items-center space-x-2 hover:text-[#833556] transition-colors duration-300 cursor-pointer"
+                  >
+                    <Phone size={16} className="text-[#833556]" />
+                    <span className="text-gray-600">+1 (405) 535-1599</span>
+                  </a>
+                  <a 
+                    href="mailto:faithfeedsInternational@gmail.com"
+                    className="flex items-center space-x-2 hover:text-[#833556] transition-colors duration-300 cursor-pointer"
+                  >
+                    <Mail size={16} className="text-[#833556]" />
+                    <span className="text-gray-600">faithfeedsInternational@gmail.com</span>
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -508,13 +829,24 @@ export default function VolunteerPage() {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 lg:gap-6 justify-center">
-            <button className="group relative px-8 py-4 lg:px-10 lg:py-5 bg-white text-[#833556] font-bold text-lg lg:text-xl rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-105 transform hover:-translate-y-2 flex items-center justify-center gap-3 mobile-optimized overflow-hidden">
+            <button 
+              onClick={() => {
+                const formSection = document.getElementById('volunteer-form');
+                if (formSection) {
+                  formSection.scrollIntoView({ behavior: 'smooth' });
+                }
+              }}
+              className="group relative px-8 py-4 lg:px-10 lg:py-5 bg-white text-[#833556] font-bold text-lg lg:text-xl rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-105 transform hover:-translate-y-2 flex items-center justify-center gap-3 mobile-optimized overflow-hidden"
+            >
               <Users size={24} className="relative z-10 group-hover:animate-pulse" />
               <span className="relative z-10">Apply Now</span>
               <ArrowRight size={24} className="relative z-10 group-hover:translate-x-1 transition-transform duration-300" />
             </button>
             
-            <button className="group relative px-8 py-4 lg:px-10 lg:py-5 bg-transparent border-2 border-white text-white font-bold text-lg lg:text-xl rounded-2xl hover:bg-white hover:text-[#833556] transition-all duration-300 hover:scale-105 transform hover:-translate-y-2 flex items-center justify-center gap-3 mobile-optimized">
+            <button 
+              onClick={() => window.open('tel:+14055351599', '_self')}
+              className="group relative px-8 py-4 lg:px-10 lg:py-5 bg-transparent border-2 border-white text-white font-bold text-lg lg:text-xl rounded-2xl hover:bg-white hover:text-[#833556] transition-all duration-300 hover:scale-105 transform hover:-translate-y-2 flex items-center justify-center gap-3 mobile-optimized"
+            >
               <Phone size={24} className="group-hover:animate-pulse" />
               <span>Call Us</span>
             </button>

@@ -970,11 +970,20 @@ export default function AboutPage() {
                 <h4 className="text-lg lg:text-xl font-bold text-gray-900 mb-6">Quick Actions</h4>
                 <div className="space-y-3">
                   {[
-                    { icon: Users, text: "Volunteer Registration" },
-                    { icon: Heart, text: "Partnership Inquiry" },
-                    { icon: Shield, text: "Donation Information" }
+                    { icon: Users, text: "Volunteer Registration", action: () => router.push('/pages/volunteer') },
+                    { icon: Heart, text: "Donate Now", action: handleDonateClick },
+                    { icon: Shield, text: "Contact Us", action: () => {
+                      const contactSection = document.getElementById('contact');
+                      if (contactSection) {
+                        contactSection.scrollIntoView({ behavior: 'smooth' });
+                      }
+                    }}
                   ].map((item, index) => (
-                    <button key={index} className="w-full text-left text-[#833556] px-4 py-4 bg-white rounded-2xl hover:bg-[#833556] hover:text-white transition-all duration-300 flex items-center gap-3 mobile-optimized group">
+                    <button 
+                      key={index} 
+                      onClick={item.action}
+                      className="w-full text-left text-[#833556] px-4 py-4 bg-white rounded-2xl hover:bg-[#833556] hover:text-white transition-all duration-300 flex items-center gap-3 mobile-optimized group"
+                    >
                       <item.icon size={20} className="group-hover:scale-110 transition-transform duration-300" />
                       <span className="font-medium">{item.text}</span>
                     </button>
@@ -1017,11 +1026,27 @@ export default function AboutPage() {
             Partner with us to empower the next generation of leaders.
           </p>
           
+          {/* Donation Impact Message */}
+          <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 lg:p-8 mb-8 lg:mb-12 border border-white/20 max-w-4xl mx-auto">
+            <p className="text-base sm:text-lg lg:text-xl text-white/95 leading-relaxed mb-4">
+              <span className="font-semibold text-[#ffd700]">Imagine a child sitting in a classroom, stomach growling, mind wandering.</span> Not because they lack intelligence or potential, but because they haven't eaten since yesterday. This is the reality for thousands of children we serve.
+            </p>
+            <p className="text-base sm:text-lg lg:text-xl text-white/95 leading-relaxed mb-4">
+              <span className="font-semibold text-[#ffd700]">Your donation doesn't just provide a meal — it unlocks potential.</span> It transforms hunger into focus, despair into hope, and empty stomachs into full hearts. Every dollar you give becomes breakfast, becomes concentration, becomes a child's chance to learn and dream.
+            </p>
+            <p className="text-base sm:text-lg lg:text-xl text-white/95 leading-relaxed">
+              <span className="font-semibold text-[#ffd700]">Join us in this sacred mission.</span> Because when you feed a child's body, you nourish their soul. When you give them tools to learn, you give them wings to fly. Your generosity today becomes their tomorrow.
+            </p>
+          </div>
+          
           <div className="flex flex-col sm:flex-row gap-4 lg:gap-6 justify-center">
-            <button className="group relative px-8 py-4 lg:px-10 lg:py-5 bg-white text-[#833556] font-bold text-lg lg:text-xl rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-105 transform hover:-translate-y-2 flex items-center justify-center gap-3 mobile-optimized overflow-hidden">
+            <button 
+              onClick={() => router.push('/pages/volunteer')}
+              className="group relative px-8 py-4 lg:px-10 lg:py-5 bg-white text-[#833556] font-bold text-lg lg:text-xl rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-105 transform hover:-translate-y-2 flex items-center justify-center gap-3 mobile-optimized overflow-hidden"
+            >
               <div className="absolute inset-0 bg-gradient-to-r from-gray-50 to-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               <Users size={24} className="relative z-10 group-hover:animate-pulse" />
-              <span className="relative z-10">Get Involved</span>
+              <span className="relative z-10">Volunteer Now</span>
               <ArrowRight size={24} className="relative z-10 group-hover:translate-x-1 transition-transform duration-300" />
             </button>
             

@@ -1,9 +1,9 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
+import { useRouter } from 'next/navigation';
 import { ChevronDown, Heart, Globe, ArrowRight, HandHeart, Users, Target, Award, Play } from "lucide-react";
 import { STRIPE_DONATION_LINK } from "@/config/constants";
 import { gsap } from "gsap";
-import { useRouter } from "next/navigation";
 
 const LandingPage = () => {
   const router = useRouter();
@@ -351,12 +351,12 @@ const LandingPage = () => {
                 </button>
 
                 <button 
-                  onClick={handleLearnMoreClick}
+                  onClick={() => router.push('/pages/volunteer')}
                   className="group relative px-6 py-4 lg:px-8 lg:py-4 bg-transparent border-2 border-gray-300 text-gray-700 font-semibold text-base lg:text-lg rounded-2xl hover:border-[#833556] hover:text-[#833556] transition-all duration-300 hover:scale-105 transform hover:-translate-y-2 flex items-center justify-center gap-2 mobile-optimized overflow-hidden"
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-[#833556]/5 to-[#a04066]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   <div className="relative z-10 flex items-center justify-center gap-2">
-                    Learn More
+                    Volunteer Now
                     <ArrowRight
                       size={20}
                       className="group-hover:translate-x-2 transition-transform duration-300"
