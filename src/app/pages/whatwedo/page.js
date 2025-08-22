@@ -372,12 +372,16 @@ const WhatWeDoPage = () => {
               </h1>
 
               {/* Subtitle */}
-              <p className="text-lg sm:text-xl text-gray-200 leading-relaxed mb-8">
-                Through comprehensive programs including shelter homes, schools,
-                healthcare, and empowerment initiatives, we create lasting
-                change in the lives of underprivileged children and youth
-                worldwide.
+              <p className="text-lg sm:text-xl text-gray-200 leading-relaxed mb-6">
+                We don't just provide services — we transform lives. From breakfast programs that fuel learning to shelter homes that provide safety, we address the root causes of poverty and give children the foundation they need to succeed.
               </p>
+              
+              {/* Impact Highlight */}
+              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 mb-8 border border-white/20">
+                <p className="text-base sm:text-lg text-gray-200 leading-relaxed">
+                  <span className="font-semibold text-[#833556]">Our approach is simple:</span> Every child deserves access to education, nutrition, and care. We make this possible through comprehensive programs that address both immediate needs and long-term development.
+                </p>
+              </div>
 
               {/* CTA Buttons */}
               <div className="flex flex-col sm:flex-row gap-4 mb-8">
@@ -661,11 +665,15 @@ const WhatWeDoPage = () => {
             <div className="flex flex-col sm:flex-row justify-center items-center gap-6 mb-8 text-purple-100">
               <div className="flex items-center space-x-2">
                 <Phone size={20} className="text-purple-200" />
-                <span>24/7 Helpline: +1 (555) 123-4567</span>
+                <span>+1 (405) 535-1599</span>
               </div>
               <div className="flex items-center space-x-2">
                 <Mail size={20} className="text-purple-200" />
-                <span>info@faithfeedsinternational.org</span>
+                <span>faithfeedsInternational@gmail.com</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <MapPin size={20} className="text-purple-200" />
+                <span>Oklahoma City, OK</span>
               </div>
             </div>
 

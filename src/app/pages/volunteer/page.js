@@ -260,9 +260,16 @@ export default function VolunteerPage() {
                </span>
              </h1>
 
-             <p className="text-lg sm:text-xl lg:text-2xl text-white/95 leading-relaxed max-w-4xl mx-auto drop-shadow-lg mb-8">
-               Join our community of dedicated volunteers and help transform lives through faith, compassion, and service.
+             <p className="text-lg sm:text-xl lg:text-2xl text-white/95 leading-relaxed max-w-5xl mx-auto drop-shadow-lg mb-6">
+               Your time and compassion can change a child's life forever. Join our volunteers who are making the difference between hunger and hope, between despair and dreams.
              </p>
+             
+             {/* Volunteer Impact Highlight */}
+             <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 lg:p-8 mb-8 border border-white/20 max-w-4xl mx-auto">
+               <p className="text-base sm:text-lg lg:text-xl text-white/95 leading-relaxed drop-shadow-lg">
+                 <span className="font-semibold text-[#ffd700]">Every volunteer hour matters:</span> Whether serving meals, tutoring children, or organizing supplies, you're helping break the cycle of poverty and giving children the tools they need to succeed.
+               </p>
+             </div>
 
              <div className="mt-8">
                <button className="group relative px-8 py-4 lg:px-10 lg:py-5 bg-[#833556] text-white font-bold text-lg lg:text-xl rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-105 transform hover:-translate-y-2 flex items-center justify-center gap-3 mx-auto mobile-optimized overflow-hidden">

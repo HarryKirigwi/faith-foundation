@@ -304,9 +304,16 @@ export default function BlogPage() {
               </span>
             </h1>
 
-            <p className="text-lg sm:text-xl lg:text-2xl text-white/95 leading-relaxed max-w-4xl mx-auto drop-shadow-lg mb-8">
-              Discover inspiring stories, community updates, and insights from our mission to transform lives through faith and action.
+            <p className="text-lg sm:text-xl lg:text-2xl text-white/95 leading-relaxed max-w-5xl mx-auto drop-shadow-lg mb-6">
+              Behind every statistic is a story. Behind every meal served is a child's smile. Read the real stories of transformation, hope, and the impact your support creates.
             </p>
+            
+            {/* Blog Impact Highlight */}
+            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 lg:p-8 mb-8 border border-white/20 max-w-4xl mx-auto">
+              <p className="text-base sm:text-lg lg:text-xl text-white/95 leading-relaxed drop-shadow-lg">
+                <span className="font-semibold text-[#ffd700]">Every story matters:</span> From the child who now has breakfast before school to the family that found hope through our programs, these stories show the real impact of your generosity and faith in action.
+              </p>
+            </div>
 
             <div className="mt-8">
               <button className="group relative px-8 py-4 lg:px-10 lg:py-5 bg-[#833556] text-white font-bold text-lg lg:text-xl rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-105 transform hover:-translate-y-2 flex items-center justify-center gap-3 mx-auto mobile-optimized overflow-hidden">

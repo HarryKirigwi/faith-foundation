@@ -264,19 +264,26 @@ export default function ProjectsPage() {
           >
             <div className="inline-flex items-center px-4 py-2 rounded-full bg-[#833556]/90 text-white text-sm font-medium mb-4 backdrop-blur-sm">
               <Target size={16} className="mr-2" />
-              Our Projects
+              Our Impact Projects
             </div>
 
             <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold text-white leading-tight mb-6 drop-shadow-2xl">
-              Transforming
+              From Vision to
               <span className="text-[#ffd700] block mt-2 drop-shadow-2xl bg-gradient-to-r from-[#ffd700] to-[#ffed4a] bg-clip-text text-transparent">
-                Lives Through Action
+                Action
               </span>
             </h1>
 
-            <p className="text-lg sm:text-xl lg:text-2xl text-white/95 leading-relaxed max-w-4xl mx-auto drop-shadow-lg mb-8">
-              Discover our comprehensive projects that address education, healthcare, housing, and community development.
+            <p className="text-lg sm:text-xl lg:text-2xl text-white/95 leading-relaxed max-w-5xl mx-auto drop-shadow-lg mb-6">
+              We don't just talk about change — we create it. Our projects provide the essentials that many take for granted: meals, education, and the tools children need to succeed.
             </p>
+            
+            {/* Project Impact Highlight */}
+            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 lg:p-8 mb-8 border border-white/20 max-w-4xl mx-auto">
+              <p className="text-base sm:text-lg lg:text-xl text-white/95 leading-relaxed drop-shadow-lg">
+                <span className="font-semibold text-[#ffd700]">Every project starts with a simple truth:</span> Basic necessities like breakfast, school supplies, and shoes shouldn't be luxuries. We're making them accessible to every child who needs them.
+              </p>
+            </div>
 
             <div className="mt-8">
               <button className="group relative px-8 py-4 lg:px-10 lg:py-5 bg-[#833556] text-white font-bold text-lg lg:text-xl rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-105 transform hover:-translate-y-2 flex items-center justify-center gap-3 mx-auto mobile-optimized overflow-hidden">

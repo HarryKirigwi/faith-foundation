@@ -4,6 +4,8 @@ export const STRIPE_DONATION_LINK = process.env.NEXT_PUBLIC_STRIPE_DONATION_LINK
 // Other constants can be added here
 export const SITE_NAME = 'Faith Feeds International';
 export const CONTACT_PHONE = '+1 (405) 535-1599';
-export const CONTACT_EMAIL = 'info@faithfeedsinternational.org';
-export const ADDRESS = '3528 SE 94 street Okc';
+export const CONTACT_EMAIL = 'faithfeedsInternational@gmail.com';
+export const CONTACT_LOCATION = 'Oklahoma City, OK';
+
+
 

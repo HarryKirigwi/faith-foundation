@@ -325,12 +325,17 @@ const LandingPage = () => {
 
               {/* Subtitle */}
               <p 
-                className="text-base sm:text-lg lg:text-xl text-gray-600 leading-relaxed max-w-xl text-animate-container"
+                className="text-base sm:text-lg lg:text-xl text-gray-600 leading-relaxed max-w-2xl text-animate-container mb-6"
               >
-                Join us in our mission to connect people with opportunities for
-                transformation through faith, community support, and sustainable
-                initiatives that create lasting change.
+                Every child deserves to dream without hunger stealing their focus. We're breaking the cycle of poverty by providing meals, education, and hope to children who need it most.
               </p>
+              
+              {/* Impact Statement */}
+              <div className="bg-gradient-to-r from-[#833556]/10 to-[#a04066]/10 rounded-xl p-4 lg:p-6 mb-6 border border-[#833556]/20">
+                <p className="text-sm sm:text-base lg:text-lg text-gray-700 leading-relaxed max-w-2xl">
+                  <span className="font-semibold text-[#833556]">For some children, what we provide is the only meal they'll eat all day.</span> Your support places food on a plate, a pencil in a hand, and hope in a heart.
+                </p>
+              </div>
 
               {/* Action Buttons */}
               <div 

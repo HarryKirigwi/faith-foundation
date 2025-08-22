@@ -85,15 +85,15 @@ const FaithFeedsFooter = () => {
             <div className="space-y-3">
               <div className="flex items-center space-x-3 text-sm text-gray-300">
                 <MapPin size={16} className="text-[#833556] flex-shrink-0" />
-                <span>Global Headquarters, International</span>
+                <span>Oklahoma City, OK</span>
               </div>
               <div className="flex items-center space-x-3 text-sm text-gray-300">
                 <Phone size={16} className="text-[#833556] flex-shrink-0" />
-                <span>+1 (555) 123-4567</span>
+                <span>+1 (405) 535-1599</span>
               </div>
               <div className="flex items-center space-x-3 text-sm text-gray-300">
                 <Mail size={16} className="text-[#833556] flex-shrink-0" />
-                <span>info@faithfeedsinternational.org</span>
+                <span>faithfeedsInternational@gmail.com</span>
               </div>
             </div>
           </div>

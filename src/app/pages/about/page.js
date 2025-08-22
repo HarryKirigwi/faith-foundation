@@ -186,9 +186,20 @@ export default function AboutPage() {
             </h1>
 
             {/* Subtitle */}
-            <p className="text-lg sm:text-xl lg:text-2xl text-white/95 leading-relaxed max-w-4xl mx-auto drop-shadow-lg mb-8">
-              A faith-led initiative dedicated to restoring dignity through uplifting vulnerable communities 
-              while empowering youth to lead change through service and leadership.
+            <p className="text-lg sm:text-xl lg:text-2xl text-white/95 leading-relaxed max-w-5xl mx-auto drop-shadow-lg mb-8">
+              Basic needs are only "basic" to those who can afford them. In many parts of the developing world, even the simplest necessities — a meal, a pair of shoes, a notebook — are luxuries far beyond the reach of countless children.
+            </p>
+            
+            {/* Mission Statement */}
+            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 lg:p-8 mb-8 border border-white/20">
+              <p className="text-base sm:text-lg lg:text-xl text-white/95 leading-relaxed max-w-5xl mx-auto drop-shadow-lg">
+                At Faith Feeds International, we believe every child deserves the chance to dream, learn, and grow — without the needless pain of hunger stealing their focus and hope. In some communities across Africa, children sit in classrooms on empty stomachs, their minds wandering not because they lack potential, but because they lack food.
+              </p>
+            </div>
+            
+            {/* Call to Action Text */}
+            <p className="text-base sm:text-lg lg:text-xl text-white/90 leading-relaxed max-w-4xl mx-auto drop-shadow-lg mb-8">
+              That's why we partner with schools, children's homes, and rescue centers to provide not only warm, nutritious breakfasts, and in some cases lunches, but also essential learning tools: exercise books, pens, shoes, and other items that should be every child's right, yet remain out of reach for so many.
             </p>
 
             {/* Enhanced CTA Button */}
@@ -816,7 +827,7 @@ export default function AboutPage() {
                     <input
                       type="tel"
                       className="w-full px-4 py-4 border-2 border-gray-300 rounded-2xl focus:ring-2 focus:ring-[#833556] focus:border-transparent transition-all duration-300 text-gray-900 placeholder:text-gray-500 hover:border-[#833556]/50"
-                      placeholder="+1 (555) 123-4567"
+                      placeholder="+1 (405) 535-1599"
                     />
                   </div>
                   
@@ -891,7 +902,7 @@ export default function AboutPage() {
                         <h4 className="text-lg lg:text-xl font-bold text-white md:text-gray-900">Physical Address</h4>
                       </div>
                       <p className="text-white/90 md:text-gray-600 text-base lg:text-lg leading-relaxed">
-                        3528 SE 94 street Okc
+                        Oklahoma City, OK
                       </p>
                     </div>
                   </div>
