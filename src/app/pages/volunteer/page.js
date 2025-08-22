@@ -322,9 +322,9 @@ export default function VolunteerPage() {
                  <Users size={16} className="mr-2" />
                  Volunteer Impact
                </div>
-                              <h2 className="text-3xl sm:text-4xl lg:text-6xl font-bold text-gray-900 leading-tight mb-6">
+                              <h2 className="text-3xl sm:text-4xl lg:text-6xl font-bold text-white leading-tight mb-6">
                  Our Amazing
-                 <span className="text-[#833556] block mt-2 bg-gradient-to-r from-[#833556] to-[#a04066] bg-clip-text text-transparent">
+                 <span className="text-[#ffd700] block mt-2 bg-gradient-to-r from-[#ffd700] to-[#ffed4a] bg-clip-text text-transparent">
                    Volunteers
                  </span>
                </h2>
@@ -346,16 +346,16 @@ export default function VolunteerPage() {
                      }`}
                      style={{ animationDelay: `${index * 0.1}s` }}
                    >
-                     <div className="inline-flex items-center justify-center w-12 h-12 lg:w-16 lg:h-16 bg-[#833556]/10 rounded-2xl mb-4 group-hover:bg-[#833556]/20 transition-colors duration-300">
-                       <Icon size={24} className="text-[#833556]" />
+                     <div className="inline-flex items-center justify-center w-12 h-12 lg:w-16 lg:h-16 bg-white/20 rounded-2xl mb-4 group-hover:bg-white/30 transition-colors duration-300">
+                       <Icon size={24} className="text-white" />
                      </div>
                                           <div 
-                        className="stat-number text-2xl lg:text-4xl font-bold text-gray-900 mb-2"
+                        className="stat-number text-2xl lg:text-4xl font-bold text-white mb-2"
                         data-value={stat.number}
                       >
                         0
                       </div>
-                      <div className="text-gray-600 font-medium">{stat.label}</div>
+                      <div className="text-white/90 font-medium">{stat.label}</div>
                    </div>
                  );
                })}
